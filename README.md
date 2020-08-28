@@ -1,35 +1,36 @@
 <h3 align="center">Laravel AWS Video Conversion</h3>
-<p>
+<p style="text-align: center;">
 Basic working example for usage Amazon Web Services for cloud video conversion
 </p>
 
-<!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
 * [Built With](#built-with)
+* [Prerequisites](#prerequisites)
 * [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Local Environment Initialisation](#local-environment-initialisation)
+  * [Development Environment Initialisation](#development-environment-initialisation)
     * [Harbor (Docker way - MacOS / Linux)](#harbor-docker-way-for-macos-or-linux)
     * [Windows](#windows)
+  * [Usage of the Development Environment](#usage-of-the-development-environment)
   * [Amazon Web Services setup](#amazon-web-services-setup)
-* [Usage](#usage)
 
 ## Built With
 
 * [Laravel](https://laravel.com/)
 * [Harbor wrapper for Docker](https://github.com/BRACKETS-by-TRIAD/harbor-laravel)
 
+## Prerequisites
+
+* MacOS / Linux with Docker installed - you can utilize provided Docker wrapper (Harbor) for running your local environment - **recommended way** OR fully working environment which satisfies requirements for [Laravel](https://laravel.com/docs/7.x#server-requirements) 
+* Amazon AWS credentials
+
 ## Getting Started
 
 To get a local copy up and running follow these simple steps.
 
-### Prerequisites
 
-* MacOS / Linux with Docker installed - you can utilize provided Docker wrapper (Harbor) for running your local environment - **recommended way** OR fully working environment which satisfies requirements for [Laravel](https://laravel.com/docs/7.x#server-requirements) 
-* Amazon AWS credentials
  
-### Local Environment Initialisation
+### Development Environment Initialisation
 
 1. Clone the repo
 ```sh
@@ -57,17 +58,9 @@ That will set some .env variables, will prepare Docker containers, will prepare 
 php artisan key:generate & php artisan migrate
 ```
 
-### Amazon Web Services setup
+### Usage of the development environment
 
-You need to get and fill these environmental variables in your `.env` file
-```
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-```
-
-## Usage
-
-### Harbor (Docker way - MacOS / Linux)
+#### Harbor (Docker Way - MacOS / Linux)
 
 1. Start local environment
 ```sh
@@ -80,3 +73,7 @@ Your app will be reachable at http://localhost/
 ```sh
 ./harbor stop
 ```
+
+### Amazon Web Services Setup
+
+Please continue [here](resources/docs/aws-services-setup.md).
