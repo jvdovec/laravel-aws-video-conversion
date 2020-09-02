@@ -13,6 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ConversionController@showUploadForm')->name('show-upload-form');
+Route::post('do-conversion', 'ConversionController@doConversion')->name('do-conversion');
