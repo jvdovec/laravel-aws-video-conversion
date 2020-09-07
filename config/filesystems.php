@@ -30,6 +30,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Cloud Filesystem Disks for input & output
+    |--------------------------------------------------------------------------
+    |
+    | Input is used for initial upload to cloud.
+    | Output is used for storing converted files.
+    |
+    */
+
+    'cloud_disk_video_input' => env('FILESYSTEM_CLOUD_DISK_VIDEO_INPUT', 's3_video_input'),
+    'cloud_disk_video_output' => env('FILESYSTEM_CLOUD_DISK_VIDEO_OUTPUT', 's3_video_output'),
+    'cloud_disk_video_thumbnails' => env('FILESYSTEM_CLOUD_DISK_VIDEO_THUMBNAILS', 's3_video_thumbnails'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Filesystem Disks
     |--------------------------------------------------------------------------
     |
@@ -63,6 +77,33 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
+        ],
+
+        's3_video_input' => [
+            'driver' => 's3',
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_VIDEO_INPUT_REGION'),
+            'bucket' => env('AWS_VIDEO_INPUT_BUCKET'),
+            'visibility' => 'private',
+        ],
+
+        's3_video_output' => [
+            'driver' => 's3',
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_VIDEO_OUTPUT_REGION'),
+            'bucket' => env('AWS_VIDEO_OUTPUT_BUCKET'),
+            'visibility' => 'private',
+        ],
+
+        's3_video_thumbnails' => [
+            'driver' => 's3',
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_VIDEO_THUMBNAILS_REGION'),
+            'bucket' => env('AWS_VIDEO_THUMBNAILS_BUCKET'),
+            'visibility' => 'private',
         ],
 
     ],
