@@ -21,7 +21,7 @@ Make sure you have selected the correct region when working with AWS ecosystem i
 
 ### Access Key & Secret
 
-1. Sign in to the AWS Management Console as the root user
+1. Sign in to the [AWS Management Console](https://console.aws.amazon.com/) as the root user
 
 2. In the navigation bar on the upper right, choose your account name or number and then choose My Security Credentials.
 
