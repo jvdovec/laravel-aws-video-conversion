@@ -16,26 +16,6 @@ return [
 
     /*
      |--------------------------------------------------------------------------
-     | AWS Simple Storage Service
-     |--------------------------------------------------------------------------
-     */
-    's3' => [
-        'video_input' => [
-            'bucket_name' =>   env('AWS_VIDEO_INPUT_BUCKET', null),
-            'region' =>   env('AWS_VIDEO_INPUT_REGION', null),
-        ],
-        'video_output' => [
-            'bucket_name' =>   env('AWS_VIDEO_OUTPUT_BUCKET', null),
-            'region' =>   env('AWS_VIDEO_OUTPUT_REGION', null),
-        ],
-        'video_thumbnails' => [
-            'bucket_name' =>   env('AWS_VIDEO_THUMBNAILS_BUCKET', null),
-            'region' =>   env('AWS_VIDEO_THUMBNAILS_REGION', null),
-        ],
-    ],
-
-    /*
-     |--------------------------------------------------------------------------
      | AWS Elemental MediaConvert
      |--------------------------------------------------------------------------
      */
