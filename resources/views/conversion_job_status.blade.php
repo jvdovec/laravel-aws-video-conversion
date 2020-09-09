@@ -31,10 +31,6 @@
 
     <button type="button" class="btn btn-info mt-2" onclick="$('#job-status-full').toggle();">Show / Hide Full Status Information</button>
 
-    <pre id="job-status-full" class="mt-5" style="display:none;">
-        @php
-            print_r($conversionJobStatus);
-        @endphp
-    </pre>
+    <pre id="job-status-full" class="mt-5" style="display:none;">{{ $conversionJobStatusToHtml }}</pre>
 
 @endsection

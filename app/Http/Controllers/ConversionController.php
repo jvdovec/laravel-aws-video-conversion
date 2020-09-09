@@ -60,6 +60,7 @@ class ConversionController extends Controller
             $videoThumbnailsFileKeys = [];
 
             $conversionJobStatus = $mediaConversionService->getConversionJobStatus($conversionJobId);
+            $conversionJobStatusToHtml = print_r($conversionJobStatus, true);
             $isConversionJobComplete = $mediaConversionService->isConversionJobComplete($conversionJobStatus);
 
             if ($isConversionJobComplete) {
@@ -68,7 +69,7 @@ class ConversionController extends Controller
                 $videoThumbnailsFileKeys = Storage::disk(config('filesystems.cloud_disk_video_thumbnails'))->files($pathGeneratorService->getVideoThumbnailsFolder());
             }
 
-            return view('conversion_job_status', compact('conversionJobStatus', 'conversionJobId', 'isConversionJobComplete','pathToUploadedVideoInputFile', 'videoOutputFileKey', 'videoThumbnailsFileKeys'));
+            return view('conversion_job_status', compact('conversionJobStatusToHtml', 'conversionJobId', 'isConversionJobComplete','pathToUploadedVideoInputFile', 'videoOutputFileKey', 'videoThumbnailsFileKeys'));
 
         } catch (Exception $e) {
 
