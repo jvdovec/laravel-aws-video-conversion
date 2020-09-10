@@ -34,13 +34,28 @@ class ConversionController extends Controller
              * 2. QUEUE CONVERSION
              */
 
-            $pathGeneratorService = new PathGeneratorService($pathToUploadedVideoInputFile, $mediaConversionService->getTargetExtension());
-            $conversionJobId = $mediaConversionService->queueConversion($pathGeneratorService->getFullyQualifiedPathForVideoInputWithExtension(), $pathGeneratorService->getFullyQualifiedPathForVideoOutputWithoutExtension(), $pathGeneratorService->getFullyQualifiedPathForVideoThumbnailsFolder());
+            $pathGeneratorService = new PathGeneratorService(
+                $pathToUploadedVideoInputFile,
+                $mediaConversionService->getTargetExtension()
+            );
+            $conversionJobId = $mediaConversionService->queueConversion(
+                $pathGeneratorService->getFullyQualifiedPathForVideoInputWithExtension(),
+                $pathGeneratorService->getFullyQualifiedPathForVideoOutputWithoutExtension(),
+                $pathGeneratorService->getFullyQualifiedPathForVideoThumbnailsFolder()
+            );
 
             /*
              * 3. REDIRECT TO STATUS PAGE
              */
-            return redirect(route('get-conversion-job-status', ['conversionJobId' => $conversionJobId, 'pathToUploadedVideoInputFile' => $pathToUploadedVideoInputFile]));
+            return redirect(
+                route(
+                    'get-conversion-job-status',
+                    [
+                        'conversionJobId' => $conversionJobId,
+                        'pathToUploadedVideoInputFile' => $pathToUploadedVideoInputFile
+                    ]
+                )
+            );
 
 
         } catch (Exception $e) {
@@ -69,7 +84,17 @@ class ConversionController extends Controller
                 $videoThumbnailsFileKeys = Storage::disk(config('filesystems.cloud_disk_video_thumbnails'))->files($pathGeneratorService->getVideoThumbnailsFolder());
             }
 
-            return view('conversion_job_status', compact('conversionJobStatusToHtml', 'conversionJobId', 'isConversionJobComplete','pathToUploadedVideoInputFile', 'videoOutputFileKey', 'videoThumbnailsFileKeys'));
+            return view(
+                'conversion_job_status', 
+                compact(
+                    'conversionJobStatusToHtml',
+                    'conversionJobId',
+                    'isConversionJobComplete',
+                    'pathToUploadedVideoInputFile',
+                    'videoOutputFileKey',
+                    'videoThumbnailsFileKeys'
+                )
+            );
 
         } catch (Exception $e) {
 
