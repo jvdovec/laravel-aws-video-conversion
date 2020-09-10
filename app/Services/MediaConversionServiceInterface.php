@@ -6,9 +6,9 @@ interface MediaConversionServiceInterface
 {
     /**
      *
-     * @param string $videoInputFullyQualifiedPathWithExtension
-     * @param string $videoOutputFullyQualifiedPathWithoutExtension
-     * @param string $videoThumbnailsFullyQualifiedPath
+     * @param string $videoInputFullyQualifiedPathWithExtension (example: s3://video-input-bucket/video.mkv)
+     * @param string $videoOutputFullyQualifiedPathWithoutExtension  (example: s3://video-output-bucket/video)
+     * @param string $videoThumbnailsFullyQualifiedPath (example: s3://video-thumbnails-bucket/folder-for-thumbnails-for-video/)
      * @return string
      */
     public function queueConversion(
