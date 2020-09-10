@@ -21,19 +21,15 @@ class ConversionController extends Controller
     public function doConversion(DoConversionRequest $request, MediaConversionServiceInterface $mediaConversionService)
     {
         try {
-
             /*
              * 1. UPLOAD TO CLOUD
              */
-
             $cloudDiskVideoInput = Storage::disk(config('filesystems.cloud_disk_video_input'));
             $pathToUploadedVideoInputFile = $cloudDiskVideoInput->put('', $request->getUploadedFile());
-
 
             /*
              * 2. QUEUE CONVERSION
              */
-
             $pathGeneratorService = new PathGeneratorService(
                 $pathToUploadedVideoInputFile,
                 $mediaConversionService->getTargetExtension()
@@ -56,21 +52,16 @@ class ConversionController extends Controller
                     ]
                 )
             );
-
-
         } catch (Exception $e) {
-
             return view('exception', [
                 'exception' => $e->getMessage()
             ]);
-
         }
     }
 
     public function getConversionJobStatus(string $pathToUploadedVideoInputFile, string $conversionJobId, MediaConversionServiceInterface $mediaConversionService)
     {
         try {
-
             $videoOutputFileKey = false;
             $videoThumbnailsFileKeys = [];
 
@@ -85,7 +76,7 @@ class ConversionController extends Controller
             }
 
             return view(
-                'conversion_job_status', 
+                'conversion_job_status',
                 compact(
                     'conversionJobStatusToHtml',
                     'conversionJobId',
@@ -95,13 +86,10 @@ class ConversionController extends Controller
                     'videoThumbnailsFileKeys'
                 )
             );
-
         } catch (Exception $e) {
-
             return view('exception', [
                 'exception' => $e->getMessage()
             ]);
-
         }
     }
 
