@@ -25,11 +25,15 @@
     @else
 
         <h2 class="text-danger">Conversion is not yet complete</h2>
-        <a href="{{ url()->current() }}"><button type="button" class="btn btn-primary">Click here to refresh</button></a>
+        <div>
+            <a href="{{ url()->current() }}"><button type="button" class="btn btn-primary">Click here to refresh</button></a>
+        </div>
 
     @endif
 
-    <button type="button" class="btn btn-info mt-2" onclick="$('#job-status-full').toggle();">Show / Hide Full Status Information</button>
+    <div>
+        <button type="button" class="btn btn-info mt-2" onclick="$('#job-status-full').toggle();">Show / Hide Full Status Information</button>
+    </div>
 
     <pre id="job-status-full" class="mt-5" style="display:none;">{{ $conversionJobStatusToHtml }}</pre>
 
