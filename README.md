@@ -34,7 +34,7 @@ To get a local copy up and running follow these simple steps.
 
 1. Clone the repo
 ```sh
-git clone https://github.com/JanciVd/laravel-aws-video-conversion.git
+git clone https://github.com/jvdovec/laravel-aws-video-conversion.git
 ```
 
 #### Harbor (Docker way for MacOS or Linux)
