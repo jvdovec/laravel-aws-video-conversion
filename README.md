@@ -55,7 +55,7 @@ That will set some .env variables, will prepare Docker containers, will prepare 
 1. Update .env file to suit your local environment
 2. Run Laravel init commands
 ```sh
-php artisan key:generate & php artisan migrate
+php artisan key:generate && php artisan migrate
 ```
 
 ### Usage of the development environment
