@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- root access to AWS Management Console (using less powerful access if out of scope this example)
+- root access to AWS Management Console (using less powerful access is out of scope this example)
   
 
 ## Used Services
