@@ -14,14 +14,13 @@ class DownloadVideoThumbnailRequest extends FormRequest
     public function rules()
     {
         return [
-            'fileKey' => 'required',
+            'fileKey' => 'required'
         ];
     }
 
     public function getFileKey()
     {
         $validated = $this->validated();
-
         return $validated['fileKey'] ?? null;
     }
 }

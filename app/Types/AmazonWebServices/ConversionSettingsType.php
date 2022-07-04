@@ -5,7 +5,6 @@ namespace App\Types\AmazonWebServices;
 class ConversionSettingsType
 {
     const VIDEO_WIDTH = 1280;
-
     const VIDEO_HEIGHT = 720;
 
     /*
@@ -33,8 +32,8 @@ class ConversionSettingsType
                 'OutputGroupSettings' => [
                     'Type' => 'FILE_GROUP_SETTINGS',
                     'FileGroupSettings' => [
-                        'Destination' => null,
-                    ],
+                        'Destination' => null
+                    ]
                 ],
                 'Outputs' => [
                     [
@@ -76,7 +75,7 @@ class ConversionSettingsType
                                     'Telecine' => 'NONE',
                                     'TemporalAdaptiveQuantization' => 'ENABLED',
                                     'UnregisteredSeiTimecode' => 'DISABLED',
-                                ],
+                                ]
                             ],
                             'ColorMetadata' => 'INSERT',
                             'Height' => self::VIDEO_HEIGHT,
@@ -101,21 +100,21 @@ class ConversionSettingsType
                                         'RawFormat' => 'NONE',
                                         'SampleRate' => 44100,
                                         'Specification' => 'MPEG4',
-                                    ],
+                                    ]
                                 ],
                                 'LanguageCodeControl' => 'FOLLOW_INPUT',
-                            ],
+                            ]
                         ],
                         'ContainerSettings' => [
                             'Container' => 'MP4',
                             'Mp4Settings' => [
                                 'CslgAtom' => 'INCLUDE',
                                 'FreeSpaceBox' => 'EXCLUDE',
-                                'MoovPlacement' => 'PROGRESSIVE_DOWNLOAD',
-                            ],
+                                'MoovPlacement' => 'PROGRESSIVE_DOWNLOAD'
+                            ]
                         ],
                     ],
-                ],
+                ]
             ],
 
             /*
@@ -129,28 +128,29 @@ class ConversionSettingsType
                 'OutputGroupSettings' => [
                     'Type' => 'FILE_GROUP_SETTINGS',
                     'FileGroupSettings' => [
-                        'Destination' => null,
-                    ],
+                        'Destination' => null
+                    ]
                 ],
                 'Outputs' => [
                     [
                         'VideoDescription' => [
                             'CodecSettings' => [
                                 'Codec' => 'FRAME_CAPTURE',
-                                'FrameCaptureSettings' => [
-                                    // Frame capture will encode the first frame of the output stream, then one frame every framerateDenominator/framerateNumerator seconds.
-                                    'FramerateNumerator' => 1,
-                                    // Frame capture will encode the first frame of the output stream, then one frame every framerateDenominator/framerateNumerator seconds.
-                                    'FramerateDenominator' => 5,
-                                    /*
+                                'FrameCaptureSettings' =>
+                                    [
+                                        // Frame capture will encode the first frame of the output stream, then one frame every framerateDenominator/framerateNumerator seconds.
+                                        'FramerateNumerator' => 1,
+                                        // Frame capture will encode the first frame of the output stream, then one frame every framerateDenominator/framerateNumerator seconds.
+                                        'FramerateDenominator' => 5,
+                                        /*
                                          * By default MediaConvert will always store first frame of the video,
                                          * and this cant be changed. So if we want also something else than (mostly)
                                          * empty thumbnail then MaxCaptures should be at least 2.
                                          *
                                          */
-                                    'MaxCaptures' => 2,
-                                    'Quality' => 80,
-                                ],
+                                        'MaxCaptures' => 2,
+                                        'Quality' => 80,
+                                    ],
                             ],
                             'DropFrameTimecode' => 'ENABLED',
                             'RespondToAfd' => 'NONE',
@@ -166,9 +166,9 @@ class ConversionSettingsType
                         'ContainerSettings' => [
                             'Container' => 'RAW',
                         ],
-                    ],
-                ],
-            ],
+                    ]
+                ]
+            ]
         ],
         'AdAvailOffset' => 0,
         'Inputs' => [
@@ -178,11 +178,11 @@ class ConversionSettingsType
                         'Offset' => 0,
                         'DefaultSelection' => 'NOT_DEFAULT',
                         'ProgramSelection' => 1,
-                        'SelectorType' => 'TRACK',
-                    ],
+                        'SelectorType' => 'TRACK'
+                    ]
                 ],
                 'VideoSelector' => [
-                    'ColorSpace' => 'FOLLOW',
+                    'ColorSpace' => 'FOLLOW'
                 ],
                 'FilterEnable' => 'AUTO',
                 'PsiControl' => 'USE_PSI',
@@ -190,12 +190,12 @@ class ConversionSettingsType
                 'DeblockFilter' => 'DISABLED',
                 'DenoiseFilter' => 'DISABLED',
                 'TimecodeSource' => 'EMBEDDED',
-                'FileInput' => null,
-            ],
+                'FileInput' => null
+            ]
         ],
         'TimecodeConfig' => [
-            'Source' => 'EMBEDDED',
-        ],
+            'Source' => 'EMBEDDED'
+        ]
     ];
 
     public function __construct(string $videoInputFullyQualifiedPath, string $videoOutputFullyQualifiedPath, string $videoThumbnailsFullyQualifiedPath)
