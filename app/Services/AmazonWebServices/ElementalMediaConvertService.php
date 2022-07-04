@@ -32,7 +32,6 @@ class ElementalMediaConvertService implements MediaConversionServiceInterface
         }
     }
 
-
     /**
      * @throws WithAdditionalDataException
      */
@@ -41,11 +40,10 @@ class ElementalMediaConvertService implements MediaConversionServiceInterface
         $cacheKey = 'aws_mediaconvert_endpoint';
 
         if (Cache::has($cacheKey)) {
-            return (Cache::get($cacheKey));
+            return Cache::get($cacheKey);
         }
 
         try {
-
             $client = new MediaConvertClient([
                 'version' => config('aws.mediaconvert.client_version'),
                 'region' => config('aws.mediaconvert.region'),
@@ -58,8 +56,7 @@ class ElementalMediaConvertService implements MediaConversionServiceInterface
             Cache::put($cacheKey, $singleEndpointUrl, 86400 * 31);
 
             return $singleEndpointUrl;
-
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             throw new WithAdditionalDataException('Problem with getting single endpoint', ['exception' => $e]);
         }
     }
@@ -76,15 +73,13 @@ class ElementalMediaConvertService implements MediaConversionServiceInterface
             'Settings' => $conversionSettings->getAll(),
             'Queue' => config('aws.mediaconvert.queue_arn'),
             'UserMetadata' => [
-                'Customer' => 'Amazon'
+                'Customer' => 'Amazon',
             ],
         ];
 
         try {
             return $this->client->createJob($parameters);
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             throw new WithAdditionalDataException('There was problem with creating job', ['exception' => $e]);
         }
     }
@@ -101,19 +96,18 @@ class ElementalMediaConvertService implements MediaConversionServiceInterface
         $conversionSettings = new ConversionSettingsType($videoInputFullyQualifiedPathWithExtension, $videoOutputFullyQualifiedPathWithoutExtension, $videoThumbnailsFullyQualifiedPath);
 
         $response = $this->createJob($conversionSettings);
-        if (!$response) {
+        if (! $response) {
             throw new WithAdditionalDataException('Get no response when queuing conversion', ['response' => $response]);
         }
 
         $jobData = $response->get('Job');
 
-        if (!isset($jobData['Id'])) {
+        if (! isset($jobData['Id'])) {
             throw new WithAdditionalDataException('Could not get ID of the job', ['response' => $response]);
         }
 
         return $jobData['Id'];
     }
-
 
     /**
      * @param string $conversionJobId
@@ -123,7 +117,7 @@ class ElementalMediaConvertService implements MediaConversionServiceInterface
     public function getConversionJobStatus(string $conversionJobId) : array
     {
         $response = $this->client->getJob(['Id' => $conversionJobId]);
-        if (!$response) {
+        if (! $response) {
             throw new Exception('Get no response');
         }
 
@@ -132,7 +126,7 @@ class ElementalMediaConvertService implements MediaConversionServiceInterface
 
     public function isConversionJobComplete(array $conversionJobStatus): bool
     {
-        return (isset($conversionJobStatus['Status']) && $conversionJobStatus['Status'] === 'COMPLETE');
+        return isset($conversionJobStatus['Status']) && $conversionJobStatus['Status'] === 'COMPLETE';
     }
 
     public function getTargetExtension(): string
