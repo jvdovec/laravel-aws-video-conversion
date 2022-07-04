@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ConversionController extends Controller
 {
-
     public function showUploadForm()
     {
         return view('upload');
@@ -48,13 +47,13 @@ class ConversionController extends Controller
                     'get-conversion-job-status',
                     [
                         'conversionJobId' => $conversionJobId,
-                        'pathToUploadedVideoInputFile' => $pathToUploadedVideoInputFile
+                        'pathToUploadedVideoInputFile' => $pathToUploadedVideoInputFile,
                     ]
                 )
             );
         } catch (Exception $e) {
             return view('exception', [
-                'exception' => $e->getMessage()
+                'exception' => $e->getMessage(),
             ]);
         }
     }
@@ -88,7 +87,7 @@ class ConversionController extends Controller
             );
         } catch (Exception $e) {
             return view('exception', [
-                'exception' => $e->getMessage()
+                'exception' => $e->getMessage(),
             ]);
         }
     }
@@ -96,31 +95,22 @@ class ConversionController extends Controller
     public function downloadVideoOutput(DownloadVideoOutputRequest $request)
     {
         try {
-
             return Storage::disk(config('filesystems.cloud_disk_video_output'))->download($request->getFileKey());
-
         } catch (Exception $e) {
-
             return view('exception', [
-                'exception' => $e->getMessage()
+                'exception' => $e->getMessage(),
             ]);
-
         }
     }
 
     public function downloadVideoThumbnail(DownloadVideoThumbnailRequest $request)
     {
         try {
-
             return Storage::disk(config('filesystems.cloud_disk_video_thumbnails'))->download($request->getFileKey());
-
         } catch (Exception $e) {
-
             return view('exception', [
-                'exception' => $e->getMessage()
+                'exception' => $e->getMessage(),
             ]);
-
         }
     }
-
 }

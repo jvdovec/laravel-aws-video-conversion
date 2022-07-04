@@ -7,23 +7,33 @@ use Exception;
 class PathGeneratorService
 {
     private string $videoInputWithoutExtension;
+
     private ?string $videoInputExtension;
+
     private string $videoInputWithExtension;
 
     private string $videoOutputWithoutExtension;
+
     private string $videoOutputExtension;
+
     private string $videoOutputWithExtension;
 
     private string $cloudDiskVideoInput;
+
     private string $cloudDiskVideoOutput;
+
     private string $cloudDiskVideoThumbnails;
 
     private string $driverVideoInput;
+
     private string $driverVideoOutput;
+
     private string $driverVideoThumbnails;
 
     private string $bucketNameVideoInput;
+
     private string $bucketNameVideoOutput;
+
     private string $bucketNameVideoThumbnails;
 
     /**
@@ -38,7 +48,7 @@ class PathGeneratorService
 
         $filename = $parsedPath['filename'] ?? null;
 
-        if (!$filename) {
+        if (! $filename) {
             throw new Exception('Could not obtain the filename from path');
         }
 
@@ -65,7 +75,6 @@ class PathGeneratorService
         $this->bucketNameVideoThumbnails = config('filesystems.disks.'.$this->cloudDiskVideoThumbnails.'.bucket');
     }
 
-
     public function getFullyQualifiedPathForVideoInputWithExtension() : string
     {
         return  "{$this->driverVideoInput}://$this->bucketNameVideoInput/$this->videoInputWithExtension";
@@ -90,5 +99,4 @@ class PathGeneratorService
     {
         return $this->videoInputWithoutExtension;
     }
-
 }
