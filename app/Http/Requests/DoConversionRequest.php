@@ -14,14 +14,13 @@ class DoConversionRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => 'required',
+            'file' => 'required'
         ];
     }
 
     public function getUploadedFile()
     {
         $validated = $this->validated();
-
         return $validated['file'] ?? null;
     }
 }

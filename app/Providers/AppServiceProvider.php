@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        App::bind(MediaConversionServiceInterface::class, ElementalMediaConvertService::class);
+        App::bind( MediaConversionServiceInterface::class,  ElementalMediaConvertService::class );
     }
 
     /**
