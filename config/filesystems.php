@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'local'),
+    'default' => env('FILESYSTEM_DISK', 'local'),
 
     'cloud_disk_video_input' => env('FILESYSTEM_CLOUD_DISK_VIDEO_INPUT', 's3_video_input'),
 
