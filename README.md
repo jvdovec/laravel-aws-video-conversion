@@ -24,8 +24,6 @@ Basic working example for usage Amazon Web Services for cloud video conversion
 
 ## Getting Started
 
-To get a local copy up and running follow these simple steps.
-
 ### Development environment initialisation
 
 Please continue [here](resources/docs/development-environment-initialisation.md).
