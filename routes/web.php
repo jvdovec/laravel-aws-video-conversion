@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConversionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'ConversionController@showUploadForm')->name('show-upload-form');
-Route::post('do-conversion', 'ConversionController@doConversion')->name('do-conversion');
-Route::get('get-conversion-job-status/{pathToUploadedVideoInputFile}/{conversionJobId}', 'ConversionController@getConversionJobStatus')->name('get-conversion-job-status');
-Route::post('download-video-output', 'ConversionController@downloadVideoOutput')->name('download-video-output');
-Route::post('download-video-thumbnail', 'ConversionController@downloadVideoThumbnail')->name('download-video-thumbnail');
+Route::get('/', [ConversionController::class, 'showUploadForm'])->name('show-upload-form');
+Route::post('do-conversion', [ConversionController::class, 'doConversion'])->name('do-conversion');
+Route::get('get-conversion-job-status/{pathToUploadedVideoInputFile}/{conversionJobId}', [ConversionController::class, 'getConversionJobStatus'])->name('get-conversion-job-status');
+Route::post('download-video-output', [ConversionController::class, 'downloadVideoOutput'])->name('download-video-output');
+Route::post('download-video-thumbnail', [ConversionController::class, 'downloadVideoThumbnail'])->name('download-video-thumbnail');
