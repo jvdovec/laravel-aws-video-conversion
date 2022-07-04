@@ -15,31 +15,10 @@ return [
 
     'default' => env('FILESYSTEM_DRIVER', 'local'),
 
-    /*
-    |--------------------------------------------------------------------------
-    | Default Cloud Filesystem Disk
-    |--------------------------------------------------------------------------
-    |
-    | Many applications store files both locally and in the cloud. For this
-    | reason, you may specify a default "cloud" driver here. This driver
-    | will be bound as the Cloud disk implementation in the container.
-    |
-    */
-
-    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Cloud Filesystem Disks for input & output
-    |--------------------------------------------------------------------------
-    |
-    | Input is used for initial upload to cloud.
-    | Output is used for storing converted files.
-    |
-    */
-
     'cloud_disk_video_input' => env('FILESYSTEM_CLOUD_DISK_VIDEO_INPUT', 's3_video_input'),
+
     'cloud_disk_video_output' => env('FILESYSTEM_CLOUD_DISK_VIDEO_OUTPUT', 's3_video_output'),
+
     'cloud_disk_video_thumbnails' => env('FILESYSTEM_CLOUD_DISK_VIDEO_THUMBNAILS', 's3_video_thumbnails'),
 
     /*
@@ -77,6 +56,7 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
+            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
 
         's3_video_input' => [
