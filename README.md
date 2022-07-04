@@ -8,20 +8,18 @@ Basic working example for usage Amazon Web Services for cloud video conversion
 * [Built With](#built-with)
 * [Prerequisites](#prerequisites)
 * [Getting Started](#getting-started)
-  * [Development Environment Initialisation](#development-environment-initialisation)
-    * [Harbor (Docker way - MacOS / Linux)](#harbor-docker-way-for-macos-or-linux)
-    * [Windows](#windows)
-  * [Usage of the Development Environment](#usage-of-the-development-environment)
+  * [Development environment initialisation](#development-environment-initialisation)
+  * [Usage of the development environment](#usage-of-the-development-environment)
   * [Amazon Web Services setup](#amazon-web-services-setup)
 
 ## Built With
 
 * [Laravel](https://laravel.com/)
-* [Harbor wrapper for Docker](https://github.com/BRACKETS-by-TRIAD/harbor-laravel)
+* [Laravel Sail for local development through docker](https://laravel.com/docs/9.x/sail)
 
 ## Prerequisites
 
-* MacOS / Linux with Docker installed - you can utilize provided Docker wrapper (Harbor) for running your local environment - **recommended way** OR fully working environment which satisfies requirements for [Laravel](https://laravel.com/docs/7.x#server-requirements) 
+* MacOS / Linux with Docker installed 
 * Amazon AWS credentials
 
 ## Getting Started
@@ -30,49 +28,56 @@ To get a local copy up and running follow these simple steps.
 
 
  
-### Development Environment Initialisation
+### Development environment initialisation
 
 1. Clone the repo
 ```sh
 git clone https://github.com/jvdovec/laravel-aws-video-conversion.git
 ```
 
-#### Harbor (Docker way for MacOS or Linux)
+#### Laravel Sail (Docker environment)
 
 2. Make sure no other Docker containers are running
 ```sh
 docker ps
 ```
-3. Initialise Harbor (one-time only)
+
+3. First installation of vendor packages (including Laravel Sail) - one-time only, please run following command in the root of the cloned repository
 ```sh
-./harbor init
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v $(pwd):/var/www/html \
+    -w /var/www/html \
+    laravelsail/php81-composer:latest \
+    composer install --ignore-platform-reqs
 ```
-That will set some .env variables, will prepare Docker containers, will prepare Laravel (app key + migrations)
 
-#### Windows
-
-1. Create a copy of `.env.example` to new file `.env`
-1. Update .env file to suit your local environment
-2. Run Laravel init commands
+4. Create .env file from template:
 ```sh
-php artisan key:generate && php artisan migrate
+cp .env.example .env
+```
+
+5. Generate application key:
+```sh
+./vendor/bin/sail artisan artisan key:generate --ansi
 ```
 
 ### Usage of the development environment
 
-#### Harbor (Docker Way - MacOS / Linux)
-
-1. Start local environment
+1. Start local environment in detached mode
 ```sh
-./harbor start
+./vendor/bin/sail up -d
 ```
 
 Your app will be reachable at http://localhost/
 
 2. Stop local environment
 ```sh
-./harbor stop
+./vendor/bin/sail stop
 ```
+
+3. (Optional) Create bash alias for sail
+-> https://laravel.com/docs/9.x/sail#configuring-a-bash-alias
 
 ### Amazon Web Services Setup
 
