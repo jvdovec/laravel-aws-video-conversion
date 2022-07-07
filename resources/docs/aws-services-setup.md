@@ -65,7 +65,7 @@ AWS_VIDEO_THUMBNAILS_REGION=
 AWS_MEDIACONVERT_QUEUE_ARN=
 ```
 
-4. You will need to create Amazon IAM Role for MediaConvert, please visit [Amazon IAM console](https://console.aws.amazon.com/iam/), click on Roles > Create Role > click on AWS service > from list choose MediaConvert > hit Next button > hit Next: Tags button > hit Next: Review button > as Role name write something meaningfull for you - "MediaConvert" is good enough > hit Create Role button > from roles list choose newly created & click on it > copy Role ARN and fill this .env variable:
+4. You will need to create Amazon IAM Role for MediaConvert, please visit [Amazon IAM console](https://console.aws.amazon.com/iam/), click on Roles > Create Role > click on AWS service > from list choose MediaConvert & then click on newly shown radio button "MediaConvert to confirm selection > hit Next button > in the Step 2 just hit the Next button -> in the Step 3 as Role name write something meaningful for you - "MediaConvert" is good enough > hit Create Role button > from roles list choose newly created & click on it > copy Role ARN and fill this .env variable:
 ```
 AWS_MEDIACONVERT_IAM_ROLE_ARN=
 ```  
