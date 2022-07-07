@@ -47,12 +47,12 @@ AWS_SECRET_ACCESS_KEY=
 
 3. fill information about these buckets in .env into these variables (as region use only short version of region - for example "eu-central-1"):
 ```
-AWS_VIDEO_INPUT_REGION=
 AWS_VIDEO_INPUT_BUCKET=
-AWS_VIDEO_OUTPUT_REGION=
+AWS_VIDEO_INPUT_REGION=
 AWS_VIDEO_OUTPUT_BUCKET=
-AWS_VIDEO_THUMBNAILS_REGION=
+AWS_VIDEO_OUTPUT_REGION=
 AWS_VIDEO_THUMBNAILS_BUCKET=
+AWS_VIDEO_THUMBNAILS_REGION=
 ```
 
 ### Amazon MediaConvert
