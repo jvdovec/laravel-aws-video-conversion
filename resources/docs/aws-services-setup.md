@@ -77,12 +77,13 @@ AWS_MEDIACONVERT_REGION=
 
 ### Amazon Simple Notification Service
 1. open [Amazon SNS Console](https://console.aws.amazon.com/sns)
-
 2. make sure you have selected desired region in top right selector
-
-3. if you see only landing page of this service then click on hamburger menu on the left side & click on Topics
-
-3. click on Create Topic button > choose a name for status topic (for example "conversion_status") & hit Create Topic button > topic should be created & you can create first subscription for it by hitting Create Subscription button > as Protocol choose Email or Email-JSON and as endpoint put your email address > hit Create Subscription > check your email and confirm subscription
+3. if you see only landing page of this service then click on hamburger menu on the left side & click on Topics & click on Create Topic button
+4. choose Standard type, choose a name for status topic (for example "conversion_status") & hit Create Topic button
+5. let's create first subscription for this newly created topic by hitting Create Subscription button 
+6. as Protocol choose Email or Email-JSON and as endpoint put your email address & hit Create Subscription
+7. if you have chosen Email protocol - there will be **Confirm subscription** link in the body of the email - click on it
+8. if you have chosen Email-JSON - there will be **SubscribeURL** key with the url you need to visit to confirm subscription 
   
 ### Amazon CloudWatch
 1. open [Amazon CloudWatch Console](https://console.aws.amazon.com/cloudwatch)
