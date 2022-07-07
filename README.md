@@ -17,6 +17,7 @@ Basic working example for usage Amazon Web Services for cloud video conversion
 * Backend - [Laravel](https://laravel.com/)
 * Frontend - Bootstrap 4
 * [Laravel Sail for local development through docker](https://laravel.com/docs/9.x/sail)
+* [PHP Coding Standards Fixer](https://cs.symfony.com/) - set to PSR 12  
 
 ## Prerequisites
 
@@ -28,7 +29,6 @@ Basic working example for usage Amazon Web Services for cloud video conversion
 ### Development environment initialisation
 
 Please continue [here](resources/docs/development-environment-initialisation.md).
-
 
 ### Usage of the development environment
 
