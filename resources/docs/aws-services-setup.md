@@ -8,11 +8,8 @@
 ## Used Services
 
 1. [Amazon S3](#amazon-s3) (Simple Storage Service) - for storage of the files in **buckets**
-
-2. [Amazon MediaConvert](#amazon-mediaconvert) - for conversion of the files (by processing the **jobs**) in selected **queue** 
-
-3. [Amazon SNS](#amazon-simple-notification-service) (Simple Notification Service) - for delivering notification about conversion status to our chosen endpoint. SNSs main elements are topics (basicaly channel for messages) & subscriptions. Topic is like a channel for messages sent to SNS. Each topic can have one or more subscriptions. Subscriptions are like receivers of the messages itself. We will use subscription of the form email address for the simplicity reasons. 
-
+2. [Amazon MediaConvert](#amazon-mediaconvert) - for conversion of the files (by processing the **jobs**) in selected **queue**
+3. [Amazon SNS](#amazon-simple-notification-service) (Simple Notification Service) - for delivering notification about conversion status to our chosen endpoint. SNSs main elements are topics (basicaly channel for messages) & subscriptions. Topic is like a channel for messages sent to SNS. Each topic can have one or more subscriptions. Subscriptions are like receivers of the messages itself. We will use subscription of the form email address for the simplicity reasons.
 4. [Amazon EventBridge](#amazon-eventbridge) - for watching the MediaConvert job queue for success / failure of the conversion -> then will use Amazon SNS for handling this notification 
 
 ## Instructions
@@ -22,13 +19,9 @@ Make sure you have selected the correct region when working with AWS ecosystem i
 ### Access Key & Secret
 
 1. Sign in to the [AWS Management Console](https://console.aws.amazon.com/) as the root user
-
 2. In the navigation bar on the upper right, click on your account name and then choose **Security credentials** from the context menu.
-
 3. Expand the Access keys (access key ID and secret access key) section.
-
 4. Choose Create New Access Key. If you already have two access keys, this button is disabled.
-
 5. When prompted, choose Show Access Key or Download Key File. This is your only opportunity to save your secret access key.
 
 Source: https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys
@@ -42,9 +35,7 @@ AWS_SECRET_ACCESS_KEY=
 ### Amazon S3
 
 1. open [Amazon S3 Console](https://s3.console.aws.amazon.com/s3/home)
-
 2. create 3 buckets (bucket name has to be unique in whole AWS, so you need to be creative) + pick region which you will use for whole project - first for source files, second for the converted files, third one for thumbnails
-
 3. fill information about these buckets in .env into these variables (as region use only short version of region - for example "eu-central-1"):
 ```
 AWS_VIDEO_INPUT_BUCKET=
@@ -57,19 +48,15 @@ AWS_VIDEO_THUMBNAILS_REGION=
 
 ### Amazon MediaConvert
 1. open [Amazon MediaConvert Console](https://console.aws.amazon.com/mediaconvert)
- 
-2. make sure you have selected desired region in top right selector
- 
+2. **make sure you have selected desired region in top right selector**
 3. if you see only landing page of this service then click on hamburger menu on the left side & click on Queues -> click on Default queue and copy Queue ARN (it is unique identifier of queue in AWS ecosystem) and save it to this .env variable:
 ```
 AWS_MEDIACONVERT_QUEUE_ARN=
 ```
-
 4. You will need to create Amazon IAM Role for MediaConvert, please visit [Amazon IAM console](https://console.aws.amazon.com/iam/), click on Roles > Create Role > click on AWS service > from list choose MediaConvert & then click on newly shown radio button "MediaConvert to confirm selection > hit Next button > in the Step 2 just hit the Next button -> in the Step 3 as Role name write something meaningful for you - "MediaConvert" is good enough > hit Create Role button > from roles list choose newly created & click on it > copy Role ARN and fill this .env variable:
 ```
 AWS_MEDIACONVERT_IAM_ROLE_ARN=
-```  
-
+```
 5. Save your chosen region identifier into this .env variable  (as region use only short version of region - for example "eu-central-1"):
 ```
 AWS_MEDIACONVERT_REGION=
@@ -77,7 +64,7 @@ AWS_MEDIACONVERT_REGION=
 
 ### Amazon Simple Notification Service
 1. open [Amazon SNS Console](https://console.aws.amazon.com/sns)
-2. make sure you have selected desired region in top right selector
+2. **make sure you have selected desired region in top right selector**
 3. if you see only landing page of this service then click on hamburger menu on the left side & click on Topics & click on Create Topic button
 4. choose Standard type, choose a name for status topic (for example "conversion_status") & hit Create Topic button
 5. let's create first subscription for this newly created topic by hitting Create Subscription button 
@@ -87,7 +74,7 @@ AWS_MEDIACONVERT_REGION=
   
 ### Amazon EventBridge
 1. open [Amazon EventBridge Console](https://console.aws.amazon.com/events)
-2. make sure you have selected desired region in top right selector
+2. **make sure you have selected desired region in top right selector**
 3. expand Events in the left menu -> click on Rules > Create rule
 4. write the name of the rule, for example "mediaconvert_job_status_changed" -> hit the Next button
 5. scroll to the Event pattern section
