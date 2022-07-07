@@ -75,27 +75,27 @@ class PathGeneratorService
         $this->bucketNameVideoThumbnails = config('filesystems.disks.'.$this->cloudDiskVideoThumbnails.'.bucket');
     }
 
-    public function getFullyQualifiedPathForVideoInputWithExtension() : string
+    public function getFullyQualifiedPathForVideoInputWithExtension(): string
     {
         return  "{$this->driverVideoInput}://$this->bucketNameVideoInput/$this->videoInputWithExtension";
     }
 
-    public function getFullyQualifiedPathForVideoOutputWithoutExtension() : string
+    public function getFullyQualifiedPathForVideoOutputWithoutExtension(): string
     {
         return "{$this->driverVideoInput}://$this->bucketNameVideoOutput/$this->videoInputWithoutExtension";
     }
 
-    public function getFullyQualifiedPathForVideoThumbnailsFolder() : string
+    public function getFullyQualifiedPathForVideoThumbnailsFolder(): string
     {
         return "{$this->driverVideoThumbnails}://$this->bucketNameVideoThumbnails/{$this->getVideoThumbnailsFolder()}/";
     }
 
-    public function getVideoOutputWithExtension() : string
+    public function getVideoOutputWithExtension(): string
     {
         return $this->videoOutputWithExtension;
     }
 
-    public function getVideoThumbnailsFolder() : string
+    public function getVideoThumbnailsFolder(): string
     {
         return $this->videoInputWithoutExtension;
     }

@@ -4,16 +4,16 @@ namespace App\Types\AmazonWebServices;
 
 class ConversionSettingsType
 {
-    const VIDEO_WIDTH = 1280;
+    public const VIDEO_WIDTH = 1280;
 
-    const VIDEO_HEIGHT = 720;
+    public const VIDEO_HEIGHT = 720;
 
     /*
      * Extension used for generating paths
      *
      * Make sure that extension relates to conversion settings container
      */
-    const EXTENSION = 'mp4';
+    public const EXTENSION = 'mp4';
 
     /*
      * Default conversion settings for video conversion & thumbnail generation
@@ -210,7 +210,7 @@ class ConversionSettingsType
         $this->conversionSettings['OutputGroups'][1]['OutputGroupSettings']['FileGroupSettings']['Destination'] = $videoThumbnailsFullyQualifiedPath;
     }
 
-    public function getAll() : array
+    public function getAll(): array
     {
         return $this->conversionSettings;
     }

@@ -14,19 +14,19 @@ interface MediaConversionServiceInterface
         string $videoInputFullyQualifiedPathWithExtension,
         string $videoOutputFullyQualifiedPathWithoutExtension,
         string $videoThumbnailsFullyQualifiedPath
-    ) : string;
+    ): string;
 
     /**
      * @param string $conversionJobId
      * @return array
      */
-    public function getConversionJobStatus(string $conversionJobId) : array;
+    public function getConversionJobStatus(string $conversionJobId): array;
 
     /**
      * @param array $conversionJobStatus
      * @return bool
      */
-    public function isConversionJobComplete(array $conversionJobStatus) : bool;
+    public function isConversionJobComplete(array $conversionJobStatus): bool;
 
-    public function getTargetExtension() : string;
+    public function getTargetExtension(): string;
 }

@@ -7,8 +7,8 @@ use App\Services\MediaConversionServiceInterface;
 use App\Types\AmazonWebServices\ConversionSettingsType;
 use Aws\MediaConvert\MediaConvertClient;
 use Aws\Result;
-use Cache;
 use Exception;
+use Illuminate\Support\Facades\Cache;
 
 class ElementalMediaConvertService implements MediaConversionServiceInterface
 {
@@ -91,7 +91,7 @@ class ElementalMediaConvertService implements MediaConversionServiceInterface
      * @return string
      * @throws WithAdditionalDataException
      */
-    public function queueConversion(string $videoInputFullyQualifiedPathWithExtension, string $videoOutputFullyQualifiedPathWithoutExtension, string $videoThumbnailsFullyQualifiedPath) : string
+    public function queueConversion(string $videoInputFullyQualifiedPathWithExtension, string $videoOutputFullyQualifiedPathWithoutExtension, string $videoThumbnailsFullyQualifiedPath): string
     {
         $conversionSettings = new ConversionSettingsType($videoInputFullyQualifiedPathWithExtension, $videoOutputFullyQualifiedPathWithoutExtension, $videoThumbnailsFullyQualifiedPath);
 
@@ -114,7 +114,7 @@ class ElementalMediaConvertService implements MediaConversionServiceInterface
      * @return array
      * @throws Exception
      */
-    public function getConversionJobStatus(string $conversionJobId) : array
+    public function getConversionJobStatus(string $conversionJobId): array
     {
         $response = $this->client->getJob(['Id' => $conversionJobId]);
         if (! $response) {
