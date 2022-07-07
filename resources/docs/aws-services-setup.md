@@ -3,7 +3,6 @@
 ## Prerequisites
 
 - root access to AWS Management Console (using less powerful access is out of scope this example)
-  
 
 ## Used Services
 
@@ -53,14 +52,22 @@ AWS_VIDEO_THUMBNAILS_REGION=
 ```
 AWS_MEDIACONVERT_QUEUE_ARN=
 ```
-4. You will need to create Amazon IAM Role for MediaConvert, please visit [Amazon IAM console](https://console.aws.amazon.com/iam/), click on Roles > Create Role > click on AWS service > from list choose MediaConvert & then click on newly shown radio button "MediaConvert to confirm selection > hit Next button > in the Step 2 just hit the Next button -> in the Step 3 as Role name write something meaningful for you - "MediaConvert" is good enough > hit Create Role button > from roles list choose newly created & click on it > copy Role ARN and fill this .env variable:
-```
-AWS_MEDIACONVERT_IAM_ROLE_ARN=
-```
-5. Save your chosen region identifier into this .env variable  (as region use only short version of region - for example "eu-central-1"):
+4. Save your chosen region identifier into this .env variable  (as region use only short version of region - for example "eu-central-1"):
 ```
 AWS_MEDIACONVERT_REGION=
 ```
+
+### Amazon MediaConvert IAM role
+1. open [Amazon IAM console](https://console.aws.amazon.com/iam/) & click on Roles & then Create Role > 
+2. click on AWS service and from the list choose MediaConvert and then click on newly shown radio button "MediaConvert to confirm selection and hit Next button
+3. in the Step 2 just hit the Next button
+4. in the Step 3 as Role name write something meaningful for you - "MediaConvert" is good enough -> hit Create Role button
+5. from roles list choose newly created & click on it
+6. copy Role ARN and fill this .env variable with that:
+```
+AWS_MEDIACONVERT_IAM_ROLE_ARN=
+```
+
 
 ### Amazon Simple Notification Service
 1. open [Amazon SNS Console](https://console.aws.amazon.com/sns)
