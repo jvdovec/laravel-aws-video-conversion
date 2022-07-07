@@ -62,11 +62,9 @@ class ElementalMediaConvertService implements MediaConversionServiceInterface
     }
 
     /**
-     * @param ConversionSettingsType $conversionSettings
-     * @return Result
      * @throws WithAdditionalDataException
      */
-    protected function createJob(ConversionSettingsType $conversionSettings)
+    protected function createJob(ConversionSettingsType $conversionSettings): Result
     {
         $parameters = [
             'Role' => config('aws.mediaconvert.iam_role_arn'),
@@ -85,24 +83,21 @@ class ElementalMediaConvertService implements MediaConversionServiceInterface
     }
 
     /**
-     * @param string $videoInputFullyQualifiedPathWithExtension
-     * @param string $videoOutputFullyQualifiedPathWithoutExtension
-     * @param string $videoThumbnailsFullyQualifiedPath
-     * @return string
      * @throws WithAdditionalDataException
      */
-    public function queueConversion(string $videoInputFullyQualifiedPathWithExtension, string $videoOutputFullyQualifiedPathWithoutExtension, string $videoThumbnailsFullyQualifiedPath): string
+    public function queueConversion(
+        string $videoInputFullyQualifiedPathWithExtension,
+        string $videoOutputFullyQualifiedPathWithoutExtension,
+        string $videoThumbnailsFullyQualifiedPath
+    ): string
     {
         $conversionSettings = new ConversionSettingsType($videoInputFullyQualifiedPathWithExtension, $videoOutputFullyQualifiedPathWithoutExtension, $videoThumbnailsFullyQualifiedPath);
 
         $response = $this->createJob($conversionSettings);
-        if (! $response) {
-            throw new WithAdditionalDataException('Get no response when queuing conversion', ['response' => $response]);
-        }
 
         $jobData = $response->get('Job');
 
-        if (! isset($jobData['Id'])) {
+        if (!isset($jobData['Id'])) {
             throw new WithAdditionalDataException('Could not get ID of the job', ['response' => $response]);
         }
 
@@ -110,14 +105,12 @@ class ElementalMediaConvertService implements MediaConversionServiceInterface
     }
 
     /**
-     * @param string $conversionJobId
-     * @return array
      * @throws Exception
      */
     public function getConversionJobStatus(string $conversionJobId): array
     {
         $response = $this->client->getJob(['Id' => $conversionJobId]);
-        if (! $response) {
+        if (!$response) {
             throw new Exception('Get no response');
         }
 
