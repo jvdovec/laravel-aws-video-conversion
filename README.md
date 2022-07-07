@@ -14,7 +14,8 @@ Basic working example for usage Amazon Web Services for cloud video conversion
 
 ## Built With
 
-* [Laravel](https://laravel.com/)
+* Backend - [Laravel](https://laravel.com/)
+* Frontend - Bootstrap 4
 * [Laravel Sail for local development through docker](https://laravel.com/docs/9.x/sail)
 
 ## Prerequisites
