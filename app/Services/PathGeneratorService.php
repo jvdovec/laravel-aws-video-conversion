@@ -35,9 +35,9 @@ class PathGeneratorService
     /**
      * @throws Exception
      */
-    public function __construct(string $path, string $targetExtension)
+    public function __construct(string $pathToUploadedVideoInputFile, string $targetExtension)
     {
-        $parsedPath = pathinfo($path);
+        $parsedPath = pathinfo($pathToUploadedVideoInputFile);
 
         $filename = $parsedPath['filename'] ?? null;
 
