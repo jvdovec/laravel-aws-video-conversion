@@ -71,7 +71,7 @@ class PathGeneratorService
         return "$this->videoOutputFilename.$this->videoOutputExtension";
     }
 
-    public function getFullyQualifiedPathForVideoInputWithExtension(): string
+    public function getFullyQualifiedPathForVideoInputFilenameWithExtension(): string
     {
         return  "$this->driverVideoInput://$this->bucketNameVideoInput/{$this->getVideoInputFilenameWithExtension()}";
     }
