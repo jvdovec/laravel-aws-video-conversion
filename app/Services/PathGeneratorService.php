@@ -22,6 +22,8 @@ class PathGeneratorService
 
     private string $driverVideoInput;
 
+    private string $driverVideoOutput;
+
     private string $driverVideoThumbnails;
 
     private string $bucketNameVideoInput;
@@ -59,6 +61,7 @@ class PathGeneratorService
         $this->cloudDiskVideoThumbnails = config('filesystems.cloud_disk_video_thumbnails');
 
         $this->driverVideoInput = config('filesystems.disks.'.$this->cloudDiskVideoInput.'.driver');
+        $this->driverVideoOutput = config('filesystems.disks.'.$this->cloudDiskVideoOutput.'.driver');
         $this->driverVideoThumbnails = config('filesystems.disks.'.$this->cloudDiskVideoThumbnails.'.driver');
 
         $this->bucketNameVideoInput = config('filesystems.disks.'.$this->cloudDiskVideoInput.'.bucket');
@@ -73,7 +76,7 @@ class PathGeneratorService
 
     public function getFullyQualifiedPathForVideoOutputWithoutExtension(): string
     {
-        return "$this->driverVideoInput://$this->bucketNameVideoOutput/$this->videoInputWithoutExtension";
+        return "$this->driverVideoOutput://$this->bucketNameVideoOutput/$this->videoInputWithoutExtension";
     }
 
     public function getFullyQualifiedPathForVideoThumbnailsFolder(): string
