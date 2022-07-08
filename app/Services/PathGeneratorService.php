@@ -8,8 +8,6 @@ class PathGeneratorService
 {
     private string $videoInputWithoutExtension;
 
-    private ?string $videoInputExtension;
-
     private string $videoInputWithExtension;
 
     private string $videoOutputWithoutExtension;
@@ -55,7 +53,6 @@ class PathGeneratorService
         $extension = $parsedPath['extension'] ?? null;
 
         $this->videoInputWithoutExtension = $filename;
-        $this->videoInputExtension = $extension;
         $this->videoInputWithExtension = $extension ? "$filename.$extension" : $filename;
 
         $this->videoOutputWithoutExtension = $filename;
