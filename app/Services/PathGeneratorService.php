@@ -14,12 +14,6 @@ class PathGeneratorService
 
     private string $videoOutputWithExtension;
 
-    private string $cloudDiskVideoInput;
-
-    private string $cloudDiskVideoOutput;
-
-    private string $cloudDiskVideoThumbnails;
-
     private string $driverVideoInput;
 
     private string $driverVideoOutput;
@@ -53,17 +47,17 @@ class PathGeneratorService
         $this->videoOutputExtension = $targetExtension;
         $this->videoOutputWithExtension = "$filename.$this->videoOutputExtension";
 
-        $this->cloudDiskVideoInput = config('filesystems.cloud_disk_video_input');
-        $this->cloudDiskVideoOutput = config('filesystems.cloud_disk_video_output');
-        $this->cloudDiskVideoThumbnails = config('filesystems.cloud_disk_video_thumbnails');
+        $chosenCloudDiskForVideoInput = config('filesystems.cloud_disk_video_input');
+        $chosenCloudDiskForVideoOutput = config('filesystems.cloud_disk_video_output');
+        $chosenCloudDiskForVideoThumbnails = config('filesystems.cloud_disk_video_thumbnails');
 
-        $this->driverVideoInput = config('filesystems.disks.'.$this->cloudDiskVideoInput.'.driver');
-        $this->driverVideoOutput = config('filesystems.disks.'.$this->cloudDiskVideoOutput.'.driver');
-        $this->driverVideoThumbnails = config('filesystems.disks.'.$this->cloudDiskVideoThumbnails.'.driver');
+        $this->driverVideoInput = config('filesystems.disks.'.$chosenCloudDiskForVideoInput.'.driver');
+        $this->driverVideoOutput = config('filesystems.disks.'.$chosenCloudDiskForVideoOutput.'.driver');
+        $this->driverVideoThumbnails = config('filesystems.disks.'.$chosenCloudDiskForVideoThumbnails.'.driver');
 
-        $this->bucketNameVideoInput = config('filesystems.disks.'.$this->cloudDiskVideoInput.'.bucket');
-        $this->bucketNameVideoOutput = config('filesystems.disks.'.$this->cloudDiskVideoOutput.'.bucket');
-        $this->bucketNameVideoThumbnails = config('filesystems.disks.'.$this->cloudDiskVideoThumbnails.'.bucket');
+        $this->bucketNameVideoInput = config('filesystems.disks.'.$chosenCloudDiskForVideoInput.'.bucket');
+        $this->bucketNameVideoOutput = config('filesystems.disks.'.$chosenCloudDiskForVideoOutput.'.bucket');
+        $this->bucketNameVideoThumbnails = config('filesystems.disks.'.$chosenCloudDiskForVideoThumbnails.'.bucket');
     }
 
     public function getFullyQualifiedPathForVideoInputWithExtension(): string
