@@ -89,8 +89,7 @@ class ElementalMediaConvertService implements MediaConversionServiceInterface
         string $videoInputFullyQualifiedPathWithExtension,
         string $videoOutputFullyQualifiedPathWithoutExtension,
         string $videoThumbnailsFullyQualifiedPath
-    ): string
-    {
+    ): string {
         $conversionSettings = new ConversionSettingsType($videoInputFullyQualifiedPathWithExtension, $videoOutputFullyQualifiedPathWithoutExtension, $videoThumbnailsFullyQualifiedPath);
 
         $response = $this->createJob($conversionSettings);
