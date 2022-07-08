@@ -15,6 +15,7 @@ Basic working example for usage Amazon Web Services for cloud video conversion
 * Frontend - Bootstrap 4
 * [Laravel Sail for local development through docker](https://laravel.com/docs/9.x/sail)
 * [PHP Coding Standards Fixer](https://cs.symfony.com/) - set to PSR 12  
+* [Larastan](https://github.com/nunomaduro/larastan) - it is a [PHPStan](https://phpstan.org/) wrapper for Laravel
 
 ## Prerequisites
 
