@@ -6,9 +6,9 @@ use Exception;
 
 class PathGeneratorService
 {
-    private string $videoInputWithoutExtension;
+    private string $videoInputFilename;
 
-    private string $videoInputWithExtension;
+    private ?string $videoInputExtension;
 
     private string $videoOutputExtension;
 
@@ -26,6 +26,7 @@ class PathGeneratorService
 
     private string $bucketNameVideoThumbnails;
 
+
     /**
      * @throws Exception
      */
@@ -41,8 +42,8 @@ class PathGeneratorService
 
         $extension = $parsedPath['extension'] ?? null;
 
-        $this->videoInputWithoutExtension = $filename;
-        $this->videoInputWithExtension = $extension ? "$filename.$extension" : $filename;
+        $this->videoInputFilename = $filename;
+        $this->videoInputExtension = $extension;
 
         $this->videoOutputExtension = $targetExtension;
         $this->videoOutputWithExtension = "$filename.$this->videoOutputExtension";
@@ -60,14 +61,19 @@ class PathGeneratorService
         $this->bucketNameVideoThumbnails = config('filesystems.disks.'.$chosenCloudDiskForVideoThumbnails.'.bucket');
     }
 
+    protected function getVideoInputFilenameWithExtension(): string
+    {
+        return $this->videoInputExtension ? "$this->videoInputFilename.$this->videoInputExtension" : $this->videoInputFilename;
+    }
+
     public function getFullyQualifiedPathForVideoInputWithExtension(): string
     {
-        return  "$this->driverVideoInput://$this->bucketNameVideoInput/$this->videoInputWithExtension";
+        return  "$this->driverVideoInput://$this->bucketNameVideoInput/{$this->getVideoInputFilenameWithExtension()}";
     }
 
     public function getFullyQualifiedPathForVideoOutputWithoutExtension(): string
     {
-        return "$this->driverVideoOutput://$this->bucketNameVideoOutput/$this->videoInputWithoutExtension";
+        return "$this->driverVideoOutput://$this->bucketNameVideoOutput/$this->videoInputFilename";
     }
 
     public function getFullyQualifiedPathForVideoThumbnailsFolder(): string
@@ -82,6 +88,6 @@ class PathGeneratorService
 
     public function getVideoThumbnailsFolder(): string
     {
-        return $this->videoInputWithoutExtension;
+        return $this->videoInputFilename;
     }
 }
