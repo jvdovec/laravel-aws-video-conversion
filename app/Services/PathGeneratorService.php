@@ -81,13 +81,13 @@ class PathGeneratorService
         return "$this->driverVideoOutput://$this->bucketNameVideoOutput/$this->videoInputFilename";
     }
 
-    public function getFullyQualifiedPathForVideoThumbnailsFolder(): string
-    {
-        return "$this->driverVideoThumbnails://$this->bucketNameVideoThumbnails/{$this->getVideoThumbnailsFolder()}/";
-    }
-
     public function getVideoThumbnailsFolder(): string
     {
         return $this->videoInputFilename;
+    }
+
+    public function getFullyQualifiedPathForVideoThumbnailsFolder(): string
+    {
+        return "$this->driverVideoThumbnails://$this->bucketNameVideoThumbnails/{$this->getVideoThumbnailsFolder()}/";
     }
 }
