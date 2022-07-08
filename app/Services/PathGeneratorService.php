@@ -33,7 +33,7 @@ class PathGeneratorService
     {
         $parsedPath = pathinfo($pathToUploadedVideoInputFile);
 
-        $filename = $parsedPath['filename'] ?? null;
+        $filename = $parsedPath['filename'];
 
         if (! $filename) {
             throw new Exception('Could not obtain the filename from path');
