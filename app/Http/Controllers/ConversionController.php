@@ -32,7 +32,7 @@ class ConversionController extends Controller
             $mediaConversionService->getTargetExtension()
         );
         $conversionJobId = $mediaConversionService->queueConversion(
-            $pathGeneratorService->getFullyQualifiedPathForVideoInputWithExtension(),
+            $pathGeneratorService->getFullyQualifiedPathForVideoInputFilenameWithExtension(),
             $pathGeneratorService->getFullyQualifiedPathForVideoOutputWithoutExtension(),
             $pathGeneratorService->getFullyQualifiedPathForVideoThumbnailsFolder()
         );
