@@ -23,4 +23,4 @@ Basic working example for usage Amazon Web Services for cloud video conversion
 
 ## Getting Started
 
-Check the [wiki](https://laravel.com/) page for more information about the required AWS setup and additional information about development environment initialisation and usage.
+Check the [wiki](https://github.com/jvdovec/laravel-aws-video-conversion/wiki) page for more information about the required AWS setup and additional information about development environment initialisation and usage.
