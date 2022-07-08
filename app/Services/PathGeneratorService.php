@@ -33,9 +33,6 @@ class PathGeneratorService
     private string $bucketNameVideoThumbnails;
 
     /**
-     * PathGeneratorService constructor.
-     * @param string $path
-     * @param string $targetExtension
      * @throws Exception
      */
     public function __construct(string $path, string $targetExtension)
