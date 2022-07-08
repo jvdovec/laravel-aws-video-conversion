@@ -32,20 +32,20 @@ class PathGeneratorService
      */
     public function __construct(string $pathToUploadedVideoInputFile, string $targetExtension)
     {
-        $parsedPath = pathinfo($pathToUploadedVideoInputFile);
+        $parsedPathOfUploadedVideoInputFile = pathinfo($pathToUploadedVideoInputFile);
 
-        $filename = $parsedPath['filename'];
+        $filenameOfUploadedVideoInputFile = $parsedPathOfUploadedVideoInputFile['filename'];
 
-        if (! $filename) {
+        if (! $filenameOfUploadedVideoInputFile) {
             throw new Exception('Could not obtain the filename from path');
         }
 
-        $extension = $parsedPath['extension'] ?? null;
+        $extensionOfUploadedVideoInputFile = $parsedPathOfUploadedVideoInputFile['extension'] ?? null;
 
-        $this->videoInputFilename = $filename;
-        $this->videoInputExtension = $extension;
+        $this->videoInputFilename = $filenameOfUploadedVideoInputFile;
+        $this->videoInputExtension = $extensionOfUploadedVideoInputFile;
 
-        $this->videoOutputFilename = $filename;
+        $this->videoOutputFilename = $filenameOfUploadedVideoInputFile;
         $this->videoOutputExtension = $targetExtension;
 
         $chosenCloudDiskForVideoInput = config('filesystems.cloud_disk_video_input');
