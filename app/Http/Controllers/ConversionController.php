@@ -11,12 +11,15 @@ use Illuminate\Support\Facades\Storage;
 
 class ConversionController extends Controller
 {
-    public function showUploadForm()
+    public function showUploadForm(): \Illuminate\Contracts\View\View
     {
         return view('upload');
     }
 
-    public function doConversion(DoConversionRequest $request, MediaConversionServiceInterface $mediaConversionService)
+    /**
+     * @throws \Exception
+     */
+    public function doConversion(DoConversionRequest $request, MediaConversionServiceInterface $mediaConversionService): \Illuminate\Http\RedirectResponse
     {
         /*
          * 1. UPLOAD TO CLOUD
@@ -51,7 +54,10 @@ class ConversionController extends Controller
         );
     }
 
-    public function getConversionJobStatus(string $pathToUploadedVideoInputFile, string $conversionJobId, MediaConversionServiceInterface $mediaConversionService)
+    /**
+     * @throws \Exception
+     */
+    public function getConversionJobStatus(string $pathToUploadedVideoInputFile, string $conversionJobId, MediaConversionServiceInterface $mediaConversionService): \Illuminate\Contracts\View\View
     {
         $videoOutputFileKey = false;
         $videoThumbnailsFileKeys = [];
@@ -79,13 +85,13 @@ class ConversionController extends Controller
         );
     }
 
-    public function downloadVideoOutput(DownloadVideoOutputRequest $request)
+    public function downloadVideoOutput(DownloadVideoOutputRequest $request): \Symfony\Component\HttpFoundation\StreamedResponse
     {
         return Storage::disk(config('filesystems.cloud_disk_video_output'))
             ->download($request->getFileKey());
     }
 
-    public function downloadVideoThumbnail(DownloadVideoThumbnailRequest $request)
+    public function downloadVideoThumbnail(DownloadVideoThumbnailRequest $request): \Symfony\Component\HttpFoundation\StreamedResponse
     {
         return Storage::disk(config('filesystems.cloud_disk_video_thumbnails'))
             ->download($request->getFileKey());
