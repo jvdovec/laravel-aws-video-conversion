@@ -109,9 +109,6 @@ class ElementalMediaConvertService implements MediaConversionServiceInterface
     public function getConversionJobStatus(string $conversionJobId): array
     {
         $response = $this->client->getJob(['Id' => $conversionJobId]);
-        if (!$response) {
-            throw new Exception('Get no response');
-        }
 
         return $response->get('Job');
     }
