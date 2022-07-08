@@ -62,7 +62,7 @@ class ConversionController extends Controller
 
         if ($isConversionJobComplete) {
             $pathGeneratorService = new PathGeneratorService($pathToUploadedVideoInputFile, $mediaConversionService->getTargetExtension());
-            $videoOutputFileKey = $pathGeneratorService->getVideoOutputWithExtension();
+            $videoOutputFileKey = $pathGeneratorService->getVideoOutputFilenameWithExtension();
             $videoThumbnailsFileKeys = Storage::disk(config('filesystems.cloud_disk_video_thumbnails'))->files($pathGeneratorService->getVideoThumbnailsFolder());
         }
 
