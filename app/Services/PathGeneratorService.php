@@ -61,7 +61,7 @@ class PathGeneratorService
         $this->bucketNameVideoThumbnails = config('filesystems.disks.'.$chosenCloudDiskForVideoThumbnails.'.bucket');
     }
 
-    protected function getVideoInputFilenameWithExtension(): string
+    public function getVideoInputFilenameWithExtension(): string
     {
         return $this->videoInputExtension ? "$this->videoInputFilename.$this->videoInputExtension" : $this->videoInputFilename;
     }
