@@ -8,9 +8,6 @@ Basic working example for usage Amazon Web Services for cloud video conversion
 * [Built With](#built-with)
 * [Prerequisites](#prerequisites)
 * [Getting Started](#getting-started)
-  * [Development environment initialisation](#development-environment-initialisation)
-  * [Usage of the development environment](#usage-of-the-development-environment)
-  * [Amazon Web Services setup](#amazon-web-services-setup)
 
 ## Built With
 
@@ -26,16 +23,4 @@ Basic working example for usage Amazon Web Services for cloud video conversion
 
 ## Getting Started
 
-### Development environment initialisation
-
-Please continue [here](/resources/docs/development-environment-initialisation.md).
-
-### Usage of the development environment
-
-Please continue [here](/resources/docs/usage-of-the-development-environment.md).
-
-### Amazon Web Services Setup
-
-For basic minimal setup - please continue [here](/resources/docs/aws-services-setup-basic.md).
-
-For further setup (email notifications about conversion) - please continue [here](/resources/docs/aws-services-setup-notifications.md).
+Check the [wiki](https://laravel.com/) page for more information about the required AWS setup and additional information about development environment initialisation and usage.
