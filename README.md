@@ -28,14 +28,14 @@ Basic working example for usage Amazon Web Services for cloud video conversion
 
 ### Development environment initialisation
 
-Please continue [here](resources/docs/development-environment-initialisation.md).
+Please continue [here](/resources/docs/development-environment-initialisation.md).
 
 ### Usage of the development environment
 
-Please continue [here](resources/docs/usage-of-the-development-environment.md).
+Please continue [here](/resources/docs/usage-of-the-development-environment.md).
 
 ### Amazon Web Services Setup
 
-For basic minimal setup - please continue [here](resources/docs/aws-services-setup-basic.md).
+For basic minimal setup - please continue [here](/resources/docs/aws-services-setup-basic.md).
 
-For further setup (email notifications about conversion) - please continue [here](resources/docs/aws-services-setup-notifications.md).
+For further setup (email notifications about conversion) - please continue [here](/resources/docs/aws-services-setup-notifications.md).

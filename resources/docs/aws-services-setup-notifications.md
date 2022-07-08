@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- finished basic AWS setup from [here](resources/docs/aws-services-setup-basic.md).
+- finished basic AWS setup from [here](/resources/docs/aws-services-setup-basic.md).
 
 ## Used Services
 
