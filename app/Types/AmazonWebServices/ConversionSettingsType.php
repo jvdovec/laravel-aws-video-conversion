@@ -18,7 +18,7 @@ class ConversionSettingsType
     /*
      * Default conversion settings for video conversion & thumbnail generation
      *
-     * Some of the keys are as null, will be set later
+     * Some keys are set as null, will be set later
      */
     protected array $conversionSettings = [
         'OutputGroups' => [
@@ -144,7 +144,7 @@ class ConversionSettingsType
                                     'FramerateDenominator' => 5,
                                     /*
                                          * By default MediaConvert will always store first frame of the video,
-                                         * and this cant be changed. So if we want also something else than (mostly)
+                                         * and this can't be changed. So if we want also something else than (mostly)
                                          * empty thumbnail then MaxCaptures should be at least 2.
                                          *
                                          */
