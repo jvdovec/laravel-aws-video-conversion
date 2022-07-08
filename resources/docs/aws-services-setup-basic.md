@@ -1,4 +1,4 @@
-# AWS Services Setup
+# AWS Services Setup - basic one
 
 ## Prerequisites
 

@@ -36,4 +36,6 @@ Please continue [here](resources/docs/usage-of-the-development-environment.md).
 
 ### Amazon Web Services Setup
 
-Please continue [here](resources/docs/aws-services-setup.md).
+For basic minimal setup - please continue [here](resources/docs/aws-services-setup-basic.md).
+
+For further setup (email notifications about conversion) - please continue [here](resources/docs/aws-services-setup-notifications.md).
