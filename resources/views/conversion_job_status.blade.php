@@ -33,6 +33,10 @@
 
     <div>
         <button type="button" class="btn btn-info mt-2" onclick="$('#job-status-full').toggle();">Show / Hide Full Status Information</button>
+
+        <a href="{{ route('show-upload-form') }}">
+            <button type="button" class="btn btn-warning mt-2">Back to home</button>
+        </a>
     </div>
 
     <pre id="job-status-full" class="mt-5" style="display:none;">{{ $conversionJobStatusToHtml }}</pre>
