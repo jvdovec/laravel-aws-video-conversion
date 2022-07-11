@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\UploadFileToCloudAction;
 use App\Http\Requests\DoConversionRequest;
 use App\Http\Requests\DownloadVideoOutputRequest;
 use App\Http\Requests\DownloadVideoThumbnailRequest;
@@ -19,13 +20,12 @@ class ConversionController extends Controller
     /**
      * @throws \Exception
      */
-    public function doConversion(DoConversionRequest $request, MediaConversionServiceInterface $mediaConversionService): \Illuminate\Http\RedirectResponse
-    {
-        /*
-         * 1. UPLOAD TO CLOUD
-         */
-        $cloudDiskVideoInput = Storage::disk(config('filesystems.cloud_disk_video_input'));
-        $pathToUploadedVideoInputFile = $cloudDiskVideoInput->put('', $request->getUploadedFile());
+    public function doConversion(
+        DoConversionRequest $request,
+        MediaConversionServiceInterface $mediaConversionService,
+        UploadFileToCloudAction $uploadFileToCloudAction
+    ): \Illuminate\Http\RedirectResponse {
+        $pathToUploadedVideoInputFile = $uploadFileToCloudAction->handle($request->getUploadedFile());
 
         /*
          * 2. QUEUE CONVERSION
