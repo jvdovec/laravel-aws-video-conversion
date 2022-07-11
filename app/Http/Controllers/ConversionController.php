@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\QueueConversionAction;
 use App\Actions\UploadFileToCloudAction;
 use App\Http\Requests\DoConversionRequest;
 use App\Http\Requests\DownloadVideoOutputRequest;
@@ -24,23 +25,17 @@ class ConversionController extends Controller
     /**
      * @throws Exception
      */
-    public function doConversion(DoConversionRequest $request, MediaConversionServiceInterface $mediaConversionService, UploadFileToCloudAction $uploadFileToCloudAction): RedirectResponse
+    public function doConversion(
+        DoConversionRequest $request,
+        UploadFileToCloudAction $uploadFileToCloudAction,
+        QueueConversionAction $queueConversionAction
+    )
+    : RedirectResponse
     {
         $pathToUploadedVideoInputFile = $uploadFileToCloudAction->handle($request->getUploadedFile());
 
-        /*
-         * 2. QUEUE CONVERSION
-         */
-        $pathGeneratorService = new PathGeneratorService($pathToUploadedVideoInputFile, $mediaConversionService->getTargetExtension());
-        $conversionJobId = $mediaConversionService->queueConversion(
-            $pathGeneratorService->getFullyQualifiedPathForVideoInputFilenameWithExtension(),
-            $pathGeneratorService->getFullyQualifiedPathForVideoOutputFilename(),
-            $pathGeneratorService->getFullyQualifiedPathForVideoThumbnailsFolder()
-        );
+        $conversionJobId = $queueConversionAction->handle($pathToUploadedVideoInputFile);
 
-        /*
-         * 3. REDIRECT TO STATUS PAGE
-         */
         return redirect(
             route(
                 'get-conversion-job-status',
