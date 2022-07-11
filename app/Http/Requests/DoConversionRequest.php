@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\UploadedFile;
+use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 
 class DoConversionRequest extends FormRequest
 {
@@ -18,10 +20,21 @@ class DoConversionRequest extends FormRequest
         ];
     }
 
-    public function getUploadedFile()
+    public function getUploadedFile(): UploadedFile
     {
         $validated = $this->validated();
 
-        return $validated['file'] ?? null;
+        $uploadedFile = $validated['file'] ?? null;
+
+        if (!$uploadedFile) {
+            throw new UploadException('File is not present');
+        }
+
+        /** @var UploadedFile $uploadedFile */
+        if (!$uploadedFile->isValid()) {
+            throw new UploadException('Uploaded file is not valid!');
+        }
+
+        return $uploadedFile;
     }
 }
