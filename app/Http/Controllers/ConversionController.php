@@ -9,11 +9,14 @@ use App\Http\Requests\DownloadVideoThumbnailRequest;
 use App\Services\MediaConversionServiceInterface;
 use App\Services\PathGeneratorService;
 use Exception;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ConversionController extends Controller
 {
-    public function showUploadForm(): \Illuminate\Contracts\View\View
+    public function showUploadForm(): View
     {
         return view('upload');
     }
@@ -21,7 +24,7 @@ class ConversionController extends Controller
     /**
      * @throws Exception
      */
-    public function doConversion(DoConversionRequest $request, MediaConversionServiceInterface $mediaConversionService, UploadFileToCloudAction $uploadFileToCloudAction): \Illuminate\Http\RedirectResponse
+    public function doConversion(DoConversionRequest $request, MediaConversionServiceInterface $mediaConversionService, UploadFileToCloudAction $uploadFileToCloudAction): RedirectResponse
     {
         $pathToUploadedVideoInputFile = $uploadFileToCloudAction->handle($request->getUploadedFile());
 
@@ -52,7 +55,7 @@ class ConversionController extends Controller
     /**
      * @throws Exception
      */
-    public function getConversionJobStatus(string $pathToUploadedVideoInputFile, string $conversionJobId, MediaConversionServiceInterface $mediaConversionService): \Illuminate\Contracts\View\View
+    public function getConversionJobStatus(string $pathToUploadedVideoInputFile, string $conversionJobId, MediaConversionServiceInterface $mediaConversionService): View
     {
         $videoOutputFileKey = false;
         $videoThumbnailsFileKeys = [];
@@ -80,13 +83,13 @@ class ConversionController extends Controller
         );
     }
 
-    public function downloadVideoOutput(DownloadVideoOutputRequest $request): \Symfony\Component\HttpFoundation\StreamedResponse
+    public function downloadVideoOutput(DownloadVideoOutputRequest $request): StreamedResponse
     {
         return Storage::disk(config('filesystems.cloud_disk_video_output'))
             ->download($request->getFileKey());
     }
 
-    public function downloadVideoThumbnail(DownloadVideoThumbnailRequest $request): \Symfony\Component\HttpFoundation\StreamedResponse
+    public function downloadVideoThumbnail(DownloadVideoThumbnailRequest $request): StreamedResponse
     {
         return Storage::disk(config('filesystems.cloud_disk_video_thumbnails'))
             ->download($request->getFileKey());
