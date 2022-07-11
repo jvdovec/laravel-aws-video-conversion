@@ -30,7 +30,7 @@ class PathGeneratorService
     /**
      * @throws Exception
      */
-    public function __construct(string $pathToUploadedVideoInputFile)
+    public function __construct(string $pathToUploadedVideoInputFile, string $videoOutputTargetExtension)
     {
         $parsedPathOfUploadedVideoInputFile = pathinfo($pathToUploadedVideoInputFile);
 
@@ -49,7 +49,7 @@ class PathGeneratorService
         $mediaConversionService = app(MediaConversionServiceInterface::class);
 
         $this->videoOutputFilename = $filenameOfUploadedVideoInputFile;
-        $this->videoOutputExtension = $mediaConversionService->getTargetExtension();
+        $this->videoOutputExtension = $videoOutputTargetExtension;
 
         $chosenCloudDiskForVideoInput = config('filesystems.cloud_disk_video_input');
         $chosenCloudDiskForVideoOutput = config('filesystems.cloud_disk_video_output');
