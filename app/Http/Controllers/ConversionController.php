@@ -25,11 +25,8 @@ class ConversionController extends Controller
     /**
      * @throws Exception
      */
-    public function doConversion(
-        DoConversionRequest $request,
-        UploadFileToCloudAction $uploadFileToCloudAction,
-        QueueConversionAction $queueConversionAction
-    ): RedirectResponse {
+    public function doConversion(DoConversionRequest $request, UploadFileToCloudAction $uploadFileToCloudAction, QueueConversionAction $queueConversionAction): RedirectResponse
+    {
         $pathToUploadedVideoInputFile = $uploadFileToCloudAction->handle($request->getUploadedFile());
 
         $conversionJobId = $queueConversionAction->handle($pathToUploadedVideoInputFile);
@@ -50,30 +47,43 @@ class ConversionController extends Controller
      */
     public function getConversionJobStatus(string $pathToUploadedVideoInputFile, string $conversionJobId, MediaConversionServiceInterface $mediaConversionService): View
     {
-        $videoOutputFileKey = false;
-        $videoThumbnailsFileKeys = [];
-
         $conversionJobStatus = $mediaConversionService->getConversionJobStatus($conversionJobId);
-        $conversionJobStatusToHtml = print_r($conversionJobStatus, true);
+
         $isConversionJobComplete = $mediaConversionService->isConversionJobComplete($conversionJobStatus);
 
+        $viewData = $this->getViewDataForConversionJobStatus($conversionJobId, $conversionJobStatus, $isConversionJobComplete);
+
         if ($isConversionJobComplete) {
-            $pathGeneratorService = new PathGeneratorService($pathToUploadedVideoInputFile, $mediaConversionService->getTargetExtension());
-            $videoOutputFileKey = $pathGeneratorService->getVideoOutputFilenameWithExtension();
-            $videoThumbnailsFileKeys = Storage::disk(config('filesystems.cloud_disk_video_thumbnails'))->files($pathGeneratorService->getVideoThumbnailsFolder());
+            $viewData = $this->enrichViewDataForConversionJobStatusWithOutputData(
+                $viewData,
+                $pathToUploadedVideoInputFile,
+                $mediaConversionService->getTargetExtension()
+            );
         }
 
-        return view(
-            'conversion_job_status',
-            compact(
-                'conversionJobStatusToHtml',
-                'conversionJobId',
-                'isConversionJobComplete',
-                'pathToUploadedVideoInputFile',
-                'videoOutputFileKey',
-                'videoThumbnailsFileKeys'
-            )
-        );
+        return view('conversion_job_status', $viewData);
+    }
+
+    protected function getViewDataForConversionJobStatus(string $conversionJobId, array $conversionJobStatus, bool $isConversionJobComplete): array
+    {
+        return [
+            'conversionJobId' => $conversionJobId,
+            'conversionJobStatusToHtml' => print_r($conversionJobStatus, true),
+            'isConversionJobComplete' => $isConversionJobComplete,
+            'videoOutputFileKey' => false,
+            'videoThumbnailsFileKeys' => []
+        ];
+    }
+
+    protected function enrichViewDataForConversionJobStatusWithOutputData(array $viewData, string $pathToUploadedVideoInputFile, string $videoOutputTargetExtension): array
+    {
+        $pathGeneratorService = new PathGeneratorService($pathToUploadedVideoInputFile, $videoOutputTargetExtension);
+
+        $viewData['videoOutputFileKey'] = $pathGeneratorService->getVideoOutputFilenameWithExtension();
+        $viewData['videoThumbnailsFileKeys'] = Storage::disk(config('filesystems.cloud_disk_video_thumbnails'))
+            ->files($pathGeneratorService->getVideoThumbnailsFolder());
+
+        return $viewData;
     }
 
     public function downloadVideoOutput(DownloadVideoOutputRequest $request): StreamedResponse
