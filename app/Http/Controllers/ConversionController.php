@@ -8,6 +8,7 @@ use App\Http\Requests\DownloadVideoOutputRequest;
 use App\Http\Requests\DownloadVideoThumbnailRequest;
 use App\Services\MediaConversionServiceInterface;
 use App\Services\PathGeneratorService;
+use Exception;
 use Illuminate\Support\Facades\Storage;
 
 class ConversionController extends Controller
@@ -18,13 +19,10 @@ class ConversionController extends Controller
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
-    public function doConversion(
-        DoConversionRequest $request,
-        MediaConversionServiceInterface $mediaConversionService,
-        UploadFileToCloudAction $uploadFileToCloudAction
-    ): \Illuminate\Http\RedirectResponse {
+    public function doConversion(DoConversionRequest $request, MediaConversionServiceInterface $mediaConversionService, UploadFileToCloudAction $uploadFileToCloudAction): \Illuminate\Http\RedirectResponse
+    {
         $pathToUploadedVideoInputFile = $uploadFileToCloudAction->handle($request->getUploadedFile());
 
         /*
@@ -52,7 +50,7 @@ class ConversionController extends Controller
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function getConversionJobStatus(string $pathToUploadedVideoInputFile, string $conversionJobId, MediaConversionServiceInterface $mediaConversionService): \Illuminate\Contracts\View\View
     {
