@@ -30,10 +30,7 @@ class ConversionController extends Controller
         /*
          * 2. QUEUE CONVERSION
          */
-        $pathGeneratorService = new PathGeneratorService(
-            $pathToUploadedVideoInputFile,
-            $mediaConversionService->getTargetExtension()
-        );
+        $pathGeneratorService = new PathGeneratorService($pathToUploadedVideoInputFile);
         $conversionJobId = $mediaConversionService->queueConversion(
             $pathGeneratorService->getFullyQualifiedPathForVideoInputFilenameWithExtension(),
             $pathGeneratorService->getFullyQualifiedPathForVideoOutputFilename(),
