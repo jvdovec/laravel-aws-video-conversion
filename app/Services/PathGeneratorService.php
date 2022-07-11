@@ -6,25 +6,25 @@ use Exception;
 
 class PathGeneratorService
 {
-    private string $videoInputFilename;
+    protected string $videoInputFilename;
 
-    private ?string $videoInputExtension;
+    protected ?string $videoInputExtension;
 
-    private string $videoOutputFilename;
+    protected string $videoOutputFilename;
 
-    private string $videoOutputExtension;
+    protected string $videoOutputExtension;
 
-    private string $driverVideoInput;
+    protected string $driverVideoInput;
 
-    private string $driverVideoOutput;
+    protected string $driverVideoOutput;
 
-    private string $driverVideoThumbnails;
+    protected string $driverVideoThumbnails;
 
-    private string $bucketNameVideoInput;
+    protected string $bucketNameVideoInput;
 
-    private string $bucketNameVideoOutput;
+    protected string $bucketNameVideoOutput;
 
-    private string $bucketNameVideoThumbnails;
+    protected string $bucketNameVideoThumbnails;
 
 
     /**
