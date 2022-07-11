@@ -33,12 +33,12 @@ class PathGeneratorServiceTest extends TestCase
              ])
             ->getMock();
 
-        $this->setProtectedProperty($this->pathGeneratorServiceMock, 'driverVideoInput', self::DRIVER_VIDEO_INPUT );
-        $this->setProtectedProperty($this->pathGeneratorServiceMock, 'driverVideoOutput', self::DRIVER_VIDEO_OUTPUT );
-        $this->setProtectedProperty($this->pathGeneratorServiceMock, 'driverVideoThumbnails', self::DRIVER_VIDEO_THUMBNAILS );
-        $this->setProtectedProperty($this->pathGeneratorServiceMock, 'bucketNameVideoInput', self::BUCKET_NAME_VIDEO_INPUT );
-        $this->setProtectedProperty($this->pathGeneratorServiceMock, 'bucketNameVideoOutput', self::BUCKET_NAME_VIDEO_OUTPUT );
-        $this->setProtectedProperty($this->pathGeneratorServiceMock, 'bucketNameVideoThumbnails', self::BUCKET_NAME_VIDEO_THUMBNAILS );
+        $this->setProtectedProperty($this->pathGeneratorServiceMock, 'driverVideoInput', self::DRIVER_VIDEO_INPUT);
+        $this->setProtectedProperty($this->pathGeneratorServiceMock, 'driverVideoOutput', self::DRIVER_VIDEO_OUTPUT);
+        $this->setProtectedProperty($this->pathGeneratorServiceMock, 'driverVideoThumbnails', self::DRIVER_VIDEO_THUMBNAILS);
+        $this->setProtectedProperty($this->pathGeneratorServiceMock, 'bucketNameVideoInput', self::BUCKET_NAME_VIDEO_INPUT);
+        $this->setProtectedProperty($this->pathGeneratorServiceMock, 'bucketNameVideoOutput', self::BUCKET_NAME_VIDEO_OUTPUT);
+        $this->setProtectedProperty($this->pathGeneratorServiceMock, 'bucketNameVideoThumbnails', self::BUCKET_NAME_VIDEO_THUMBNAILS);
     }
 
     public function testGetVideoInputFilenameWithExtension()
