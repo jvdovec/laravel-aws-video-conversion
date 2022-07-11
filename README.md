@@ -16,6 +16,7 @@ Basic working example for usage Amazon Web Services for cloud video conversion
 * [Laravel Sail for local development through docker](https://laravel.com/docs/9.x/sail)
 * [PHP Coding Standards Fixer](https://cs.symfony.com/) - set to PSR 12  
 * [Larastan](https://github.com/nunomaduro/larastan) - it is a [PHPStan](https://phpstan.org/) wrapper for Laravel
+* [Ray](https://myray.app/) - debugging tool from Spatie
 
 ## Prerequisites
 
