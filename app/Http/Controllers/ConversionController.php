@@ -29,9 +29,7 @@ class ConversionController extends Controller
         DoConversionRequest $request,
         UploadFileToCloudAction $uploadFileToCloudAction,
         QueueConversionAction $queueConversionAction
-    )
-    : RedirectResponse
-    {
+    ): RedirectResponse {
         $pathToUploadedVideoInputFile = $uploadFileToCloudAction->handle($request->getUploadedFile());
 
         $conversionJobId = $queueConversionAction->handle($pathToUploadedVideoInputFile);
