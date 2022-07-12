@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Services\PathGeneratorService;
 use PHPUnit\Framework\TestCase;
+use ReflectionException;
 use Tests\SetsProtectedProperty;
 
 class PathGeneratorServiceTest extends TestCase
@@ -21,6 +22,9 @@ class PathGeneratorServiceTest extends TestCase
     protected const BUCKET_NAME_VIDEO_OUTPUT = 'conversion-example-output';
     protected const BUCKET_NAME_VIDEO_THUMBNAILS = 'conversion-example-output-thumbnails';
 
+    /**
+     * @throws ReflectionException
+     */
     protected function setUp(): void
     {
         parent::setUp();
