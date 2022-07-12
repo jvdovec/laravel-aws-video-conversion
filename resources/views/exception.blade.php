@@ -8,6 +8,7 @@
 
     <pre>
         @php
+            /** @var Exception $exception */
             print_r($exception)
         @endphp
     </pre>
