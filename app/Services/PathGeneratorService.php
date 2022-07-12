@@ -51,7 +51,7 @@ class PathGeneratorService
         $this->setPropertiesFromConfig();
     }
 
-    protected function setPropertiesFromConfig()
+    protected function setPropertiesFromConfig(): void
     {
         $chosenCloudDiskForVideoInput = config('filesystems.cloud_disk_video_input');
         $chosenCloudDiskForVideoOutput = config('filesystems.cloud_disk_video_output');
