@@ -51,6 +51,14 @@ class PathGeneratorService
         $this->setPropertiesFromConfig();
     }
 
+    /**
+     * @throws FilenameNotPresentException
+     */
+    public static function create($pathToUploadedVideoInputFile, $videoOutputTargetExtension): self
+    {
+        return new self($pathToUploadedVideoInputFile, $videoOutputTargetExtension);
+    }
+
     protected function setPropertiesFromConfig(): void
     {
         $chosenCloudDiskForVideoInput = config('filesystems.cloud_disk_video_input');

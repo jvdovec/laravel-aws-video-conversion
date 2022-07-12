@@ -15,7 +15,7 @@ class QueueConversionAction
     {
         $mediaConversionService = $this->instantiateMediaConversionService();
 
-        $pathGeneratorService = new PathGeneratorService($pathToUploadedVideoInputFile, $mediaConversionService->getTargetExtension());
+        $pathGeneratorService = PathGeneratorService::create($pathToUploadedVideoInputFile, $mediaConversionService->getTargetExtension());
 
         $conversionJobId = $mediaConversionService->queueConversion(
             $pathGeneratorService->getFullyQualifiedPathForVideoInputFilenameWithExtension(),

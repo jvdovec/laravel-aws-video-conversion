@@ -70,7 +70,7 @@ class ConversionController extends Controller
      */
     protected function getVideoThumbnailsFileKeys(string $pathToUploadedVideoInputFile, string $videoOutputTargetExtension): array
     {
-        $pathGeneratorService = new PathGeneratorService($pathToUploadedVideoInputFile, $videoOutputTargetExtension);
+        $pathGeneratorService = PathGeneratorService::create($pathToUploadedVideoInputFile, $videoOutputTargetExtension);
 
         return Storage::disk(config('filesystems.cloud_disk_video_thumbnails'))
             ->files($pathGeneratorService->getVideoThumbnailsFolder());
@@ -81,7 +81,7 @@ class ConversionController extends Controller
      */
     protected function getVideoOutputFileKey(string $pathToUploadedVideoInputFile, string $videoOutputTargetExtension): string
     {
-        $pathGeneratorService = new PathGeneratorService($pathToUploadedVideoInputFile, $videoOutputTargetExtension);
+        $pathGeneratorService = PathGeneratorService::create($pathToUploadedVideoInputFile, $videoOutputTargetExtension);
 
         return $pathGeneratorService->getVideoOutputFilenameWithExtension();
     }
