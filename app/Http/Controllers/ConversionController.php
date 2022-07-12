@@ -10,7 +10,6 @@ use App\Http\Requests\DownloadVideoOutputRequest;
 use App\Http\Requests\DownloadVideoThumbnailRequest;
 use App\Services\MediaConversionServiceInterface;
 use App\Services\PathGeneratorService;
-use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
