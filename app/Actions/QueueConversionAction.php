@@ -2,11 +2,15 @@
 
 namespace App\Actions;
 
+use App\Exceptions\PathGeneratorService\FilenameNotPresentException;
 use App\Services\MediaConversionServiceInterface;
 use App\Services\PathGeneratorService;
 
 class QueueConversionAction
 {
+    /**
+     * @throws FilenameNotPresentException
+     */
     public function handle(string $pathToUploadedVideoInputFile): string
     {
         $mediaConversionService = $this->instantiateMediaConversionService();
