@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
 
 class ConversionTest extends TestCase
