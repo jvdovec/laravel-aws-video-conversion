@@ -23,6 +23,9 @@ class ConversionController extends Controller
         return view('upload');
     }
 
+    /**
+     * @throws FilenameNotPresentException
+     */
     public function doConversion(DoConversionRequest $request, UploadFileToCloudAction $uploadFileToCloudAction, QueueConversionAction $queueConversionAction): RedirectResponse
     {
         $pathToUploadedVideoInputFile = $uploadFileToCloudAction->handle($request->getUploadedFile());
