@@ -75,11 +75,8 @@ class ConversionController extends Controller
      */
     protected function enrichViewDataForConversionJobStatusWithOutputData(array $viewData, string $pathToUploadedVideoInputFile, string $videoOutputTargetExtension): array
     {
-        $pathGeneratorService = new PathGeneratorService($pathToUploadedVideoInputFile, $videoOutputTargetExtension);
-
-        $viewData['videoOutputFileKey'] = $pathGeneratorService->getVideoOutputFilenameWithExtension();
-        $viewData['videoThumbnailsFileKeys'] = Storage::disk(config('filesystems.cloud_disk_video_thumbnails'))
-            ->files($pathGeneratorService->getVideoThumbnailsFolder());
+        $viewData['videoOutputFileKey'] = $this->getVideoOutputFileKey($pathToUploadedVideoInputFile, $videoOutputTargetExtension);
+        $viewData['videoThumbnailsFileKeys'] = $this->getVideoThumbnailsFileKeys($pathToUploadedVideoInputFile, $videoOutputTargetExtension);
 
         return $viewData;
     }
@@ -94,5 +91,26 @@ class ConversionController extends Controller
     {
         return Storage::disk(config('filesystems.cloud_disk_video_thumbnails'))
             ->download($request->getFileKey());
+    }
+
+    /**
+     * @throws FilenameNotPresentException
+     */
+    protected function getVideoThumbnailsFileKeys(string $pathToUploadedVideoInputFile, string $videoOutputTargetExtension): array
+    {
+        $pathGeneratorService = new PathGeneratorService($pathToUploadedVideoInputFile, $videoOutputTargetExtension);
+
+        return Storage::disk(config('filesystems.cloud_disk_video_thumbnails'))
+            ->files($pathGeneratorService->getVideoThumbnailsFolder());
+    }
+
+    /**
+     * @throws FilenameNotPresentException
+     */
+    protected function getVideoOutputFileKey(string $pathToUploadedVideoInputFile, string $videoOutputTargetExtension): string
+    {
+        $pathGeneratorService = new PathGeneratorService($pathToUploadedVideoInputFile, $videoOutputTargetExtension);
+
+        return $pathGeneratorService->getVideoOutputFilenameWithExtension();
     }
 }
