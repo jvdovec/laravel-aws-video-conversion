@@ -40,6 +40,9 @@ class ConversionController extends Controller
         );
     }
 
+    /**
+     * @throws FilenameNotPresentException
+     */
     public function getConversionJobStatus(string $pathToUploadedVideoInputFile, string $conversionJobId, MediaConversionServiceInterface $mediaConversionService): View
     {
         $conversionJobStatus = $mediaConversionService->getConversionJobStatus($conversionJobId);
@@ -49,10 +52,14 @@ class ConversionController extends Controller
         $viewData = $this->getViewDataForConversionJobStatus($conversionJobId, $conversionJobStatus, $isConversionJobComplete);
 
         if ($isConversionJobComplete) {
-            $viewData = $this->enrichViewDataForConversionJobStatusWithOutputData(
+
+            $videoOutputFileKey = $this->getVideoOutputFileKey($pathToUploadedVideoInputFile, $mediaConversionService->getTargetExtension());
+            $videoThumbnailsFileKeys = $this->getVideoThumbnailsFileKeys($pathToUploadedVideoInputFile, $mediaConversionService->getTargetExtension());
+
+            $viewData = $this->enrichViewDataForConversionJobStatusWithResultData(
                 $viewData,
-                $pathToUploadedVideoInputFile,
-                $mediaConversionService->getTargetExtension()
+                $videoOutputFileKey,
+                $videoThumbnailsFileKeys
             );
         }
 
@@ -70,13 +77,10 @@ class ConversionController extends Controller
         ];
     }
 
-    /**
-     * @throws FilenameNotPresentException
-     */
-    protected function enrichViewDataForConversionJobStatusWithOutputData(array $viewData, string $pathToUploadedVideoInputFile, string $videoOutputTargetExtension): array
+    protected function enrichViewDataForConversionJobStatusWithResultData(array $viewData, string $videoOutputFileKey, array $videoThumbnailsFileKeys): array
     {
-        $viewData['videoOutputFileKey'] = $this->getVideoOutputFileKey($pathToUploadedVideoInputFile, $videoOutputTargetExtension);
-        $viewData['videoThumbnailsFileKeys'] = $this->getVideoThumbnailsFileKeys($pathToUploadedVideoInputFile, $videoOutputTargetExtension);
+        $viewData['videoOutputFileKey'] = $videoOutputFileKey;
+        $viewData['videoThumbnailsFileKeys'] = $videoThumbnailsFileKeys;
 
         return $viewData;
     }
