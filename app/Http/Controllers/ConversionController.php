@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\QueueConversionAction;
 use App\Actions\UploadFileToCloudAction;
+use App\Exceptions\PathGeneratorService\FilenameNotPresentException;
 use App\Http\Requests\DoConversionRequest;
 use App\Http\Requests\DownloadVideoOutputRequest;
 use App\Http\Requests\DownloadVideoThumbnailRequest;
@@ -22,9 +23,6 @@ class ConversionController extends Controller
         return view('upload');
     }
 
-    /**
-     * @throws Exception
-     */
     public function doConversion(DoConversionRequest $request, UploadFileToCloudAction $uploadFileToCloudAction, QueueConversionAction $queueConversionAction): RedirectResponse
     {
         $pathToUploadedVideoInputFile = $uploadFileToCloudAction->handle($request->getUploadedFile());
@@ -42,9 +40,6 @@ class ConversionController extends Controller
         );
     }
 
-    /**
-     * @throws Exception
-     */
     public function getConversionJobStatus(string $pathToUploadedVideoInputFile, string $conversionJobId, MediaConversionServiceInterface $mediaConversionService): View
     {
         $conversionJobStatus = $mediaConversionService->getConversionJobStatus($conversionJobId);
@@ -75,6 +70,9 @@ class ConversionController extends Controller
         ];
     }
 
+    /**
+     * @throws FilenameNotPresentException
+     */
     protected function enrichViewDataForConversionJobStatusWithOutputData(array $viewData, string $pathToUploadedVideoInputFile, string $videoOutputTargetExtension): array
     {
         $pathGeneratorService = new PathGeneratorService($pathToUploadedVideoInputFile, $videoOutputTargetExtension);

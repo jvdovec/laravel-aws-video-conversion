@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use Exception;
+use App\Exceptions\PathGeneratorService\FilenameNotPresentException;
 
 class PathGeneratorService
 {
@@ -28,7 +28,7 @@ class PathGeneratorService
 
 
     /**
-     * @throws Exception
+     * @throws FilenameNotPresentException
      */
     public function __construct(string $pathToUploadedVideoInputFile, string $videoOutputTargetExtension)
     {
@@ -37,7 +37,7 @@ class PathGeneratorService
         $filenameOfUploadedVideoInputFile = $parsedPathOfUploadedVideoInputFile['filename'];
 
         if (! $filenameOfUploadedVideoInputFile) {
-            throw new Exception('Could not obtain the filename from path');
+            throw new FilenameNotPresentException();
         }
 
         $extensionOfUploadedVideoInputFile = $parsedPathOfUploadedVideoInputFile['extension'] ?? null;
