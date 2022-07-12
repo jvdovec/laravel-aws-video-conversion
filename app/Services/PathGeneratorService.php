@@ -26,29 +26,14 @@ class PathGeneratorService
 
     protected string $bucketNameVideoThumbnails;
 
-
     /**
      * @throws FilenameNotPresentException
      */
-    public function __construct(string $pathToUploadedVideoInputFile, string $videoOutputTargetExtension)
+    public function __construct($pathToUploadedVideoInputFile, $videoOutputTargetExtension)
     {
-        $parsedPathOfUploadedVideoInputFile = pathinfo($pathToUploadedVideoInputFile);
-
-        $filenameOfUploadedVideoInputFile = $parsedPathOfUploadedVideoInputFile['filename'];
-
-        if (! $filenameOfUploadedVideoInputFile) {
-            throw new FilenameNotPresentException();
-        }
-
-        $extensionOfUploadedVideoInputFile = $parsedPathOfUploadedVideoInputFile['extension'] ?? null;
-
-        $this->videoInputFilename = $filenameOfUploadedVideoInputFile;
-        $this->videoInputExtension = $extensionOfUploadedVideoInputFile;
-
-        $this->videoOutputFilename = $filenameOfUploadedVideoInputFile;
-        $this->videoOutputExtension = $videoOutputTargetExtension;
-
         $this->setPropertiesFromConfig();
+
+        $this->generate($pathToUploadedVideoInputFile, $videoOutputTargetExtension);
     }
 
     /**
@@ -72,6 +57,30 @@ class PathGeneratorService
         $this->bucketNameVideoInput = config('filesystems.disks.' . $chosenCloudDiskForVideoInput . '.bucket');
         $this->bucketNameVideoOutput = config('filesystems.disks.' . $chosenCloudDiskForVideoOutput . '.bucket');
         $this->bucketNameVideoThumbnails = config('filesystems.disks.' . $chosenCloudDiskForVideoThumbnails . '.bucket');
+    }
+
+    /**
+     * @throws FilenameNotPresentException
+     */
+    protected function generate(string $pathToUploadedVideoInputFile, string $videoOutputTargetExtension): self
+    {
+        $parsedPathOfUploadedVideoInputFile = pathinfo($pathToUploadedVideoInputFile);
+
+        $filenameOfUploadedVideoInputFile = $parsedPathOfUploadedVideoInputFile['filename'];
+
+        if (! $filenameOfUploadedVideoInputFile) {
+            throw new FilenameNotPresentException();
+        }
+
+        $extensionOfUploadedVideoInputFile = $parsedPathOfUploadedVideoInputFile['extension'] ?? null;
+
+        $this->videoInputFilename = $filenameOfUploadedVideoInputFile;
+        $this->videoInputExtension = $extensionOfUploadedVideoInputFile;
+
+        $this->videoOutputFilename = $filenameOfUploadedVideoInputFile;
+        $this->videoOutputExtension = $videoOutputTargetExtension;
+
+        return $this;
     }
 
     public function getVideoInputFilenameWithExtension(): string
